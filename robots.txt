@@ -1,0 +1,6 @@
+# Robots.txt for Elegant Floors Kuwait
+User-agent: *
+Allow: /
+
+# Sitemap URL
+Sitemap: https://elegantfloorskw.com/sitemap.xml
