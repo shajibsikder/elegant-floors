@@ -42,7 +42,7 @@
   <!-- Theme Color & Styles -->
   <meta name="theme-color" content="#16a34a">
   <link rel="icon" type="image/x-icon" href="images/1.jpg">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.2">
 
   <!-- Schema Markup (JSON-LD) -->
   <script type="application/ld+json">
@@ -401,6 +401,8 @@
       document.getElementById('nav-contact').textContent = t.navContact;
       document.getElementById('bc-home').textContent = t.bcHome;
       document.getElementById('bc-current').textContent = t.bcCurrent;
+      document.querySelectorAll('[data-lang="en"]').forEach(el => el.style.display = (lang === 'en' ? 'block' : 'none'));
+      document.querySelectorAll('[data-lang="ar"]').forEach(el => el.style.display = (lang === 'ar' ? 'block' : 'none'));
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -410,3 +412,4 @@
   </script>
 </body>
 </html>
+

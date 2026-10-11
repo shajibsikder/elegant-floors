@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -44,7 +44,7 @@
   <!-- Theme Color & Styles -->
   <meta name="theme-color" content="#16a34a">
   <link rel="icon" type="image/x-icon" href="../../images/2.jpg">
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../style.css?v=2.2">
 
   <!-- Schema Markup (JSON-LD) with Breadcrumb, Service & FAQPage -->
   <script type="application/ld+json">
@@ -558,6 +558,8 @@
       if (navFaq) navFaq.textContent = (lang === 'ar' ? 'الأسئلة الشائعة' : 'FAQ');
       const navContact = document.getElementById('nav-contact');
       if (navContact) navContact.textContent = (lang === 'ar' ? 'اتصل بنا' : 'Contact Us');
+      document.querySelectorAll('[data-lang="en"]').forEach(el => el.style.display = (lang === 'en' ? 'block' : 'none'));
+      document.querySelectorAll('[data-lang="ar"]').forEach(el => el.style.display = (lang === 'ar' ? 'block' : 'none'));
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -576,3 +578,5 @@
   </script>
 </body>
 </html>
+
+
