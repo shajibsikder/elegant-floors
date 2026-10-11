@@ -4,8 +4,8 @@
  */
 
 // Primary contact information
-const CONTACT_PHONE = '51501463';
-const WHATSAPP_NUMBER = '96551501463';
+const CONTACT_PHONE = '55983357';
+const WHATSAPP_NUMBER = '96555983357';
 
 // Service catalog data
 const servicesData = [
@@ -18,8 +18,8 @@ const servicesData = [
       ar: 'تصميم أرضية المنزل باستخدام تقنية الخشب'
     },
     description: {
-      en: 'Folding design beautifies the floor of the house. We design the house through wood technology. The company provides various types of solid wood such as natural wood and plastic. It is innovative in design and fits modern homes. We provide good quality wood technology that is very strong and good and durable. We design the floor using wood technology from good companies. So we provide a good service to our customers. So they want to design the floor of their house at a competitive price. Wood technology has become very popular in Kuwait, many people are looking for professional wood technicians. It is worth noting that more than 75% of Kuwaiti homes prefer to install wooden floors. Contact us today on WhatsApp number and regular number = 51501463',
-      ar: 'تصميم الطي يضفي جمالًا على أرضية المنزل. نحن نصمم المنزل باستخدام تقنية الخشب. توفر الشركة أنواعًا مختلفة من الخشب الصلب مثل الخشب الطبيعي والبلاستيك. يتميز التصميم بالابتكار ويتناسب مع المنازل العصرية. نحن نقدم تقنية خشب عالية الجودة تتميز بالقوة والمتانة. نقوم بتصميم الأرضيات باستخدام تقنية الخشب من شركات موثوقة، لذلك نقدم خدمة مميزة لعملائنا. ولهذا يرغب العملاء في تصميم أرضيات منازلهم بأسعار تنافسية. أصبحت تقنية الخشب شائعة جدًا في الكويت، حيث يبحث الكثير من الناس عن فنيين محترفين في مجال الخشب. ومن الجدير بالذكر أن أكثر من 75٪ من المنازل الكويتية تفضل تركيب الأرضيات الخشبية. تواصلوا معنا اليوم عبر رقم الواتساب والرقم العادي: 51501463.'
+      en: 'Folding design beautifies the floor of the house. We design the house through wood technology. The company provides various types of solid wood such as natural wood and plastic. It is innovative in design and fits modern homes. We provide good quality wood technology that is very strong and good and durable. We design the floor using wood technology from good companies. So we provide a good service to our customers. So they want to design the floor of their house at a competitive price. Wood technology has become very popular in Kuwait, many people are looking for professional wood technicians. It is worth noting that more than 75% of Kuwaiti homes prefer to install wooden floors. Contact us today on WhatsApp number and regular number = 55983357',
+      ar: 'تصميم الطي يضفي جمالًا على أرضية المنزل. نحن نصمم المنزل باستخدام تقنية الخشب. توفر الشركة أنواعًا مختلفة من الخشب الصلب مثل الخشب الطبيعي والبلاستيك. يتميز التصميم بالابتكار ويتناسب مع المنازل العصرية. نحن نقدم تقنية خشب عالية الجودة تتميز بالقوة والمتانة. نقوم بتصميم الأرضيات باستخدام تقنية الخشب من شركات موثوقة، لذلك نقدم خدمة مميزة لعملائنا. ولهذا يرغب العملاء في تصميم أرضيات منازلهم بأسعار تنافسية. أصبحت تقنية الخشب شائعة جدًا في الكويت، حيث يبحث الكثير من الناس عن فنيين محترفين في مجال الخشب. ومن الجدير بالذكر أن أكثر من 75٪ من المنازل الكويتية تفضل تركيب الأرضيات الخشبية. تواصلوا معنا اليوم عبر رقم الواتساب والرقم العادي: 55983357.'
     }
   },
   {
@@ -31,8 +31,8 @@ const servicesData = [
       ar: 'تم تصميم ديكور التلفزيون باستخدام لوح C والألياف'
     },
     description: {
-      en: 'This is a television décor design. It is designed on the wall, and once the television is set up, it looks very beautiful. We create the design using different types of boards, such as C-board, fiber, etc. We design home television décor using C-board and wooden technology. The company supplies natural wood boards made from different types of solid wood. It is an innovative design that matches modern home television décor. We provide high-quality wood technology that is very strong, good, and durable. Using good company wood technology, television décor is designed. That is why we provide our customers with excellent service. At competitive prices, we offer them television décor design for their homes. In Kuwait, wood technology has become extremely popular, and many people are looking for professional wood technicians. It is worth mentioning that more than 75% of homes in Kuwait prefer to install television décor designs using wooden boards. Contact us today through WhatsApp or regular number = 51501463',
-      ar: 'هذا تصميم ديكور التلفزيون. تصمم على الجدار وعندما يظهر في الشاشة مع تعين التلفزيون, يبدو جميلا جدا. نوفر التصميم باستخدام أنواع من اللوح, مثل لوح C-بورد, الألياف وغيرها. نصمم ديكور التلفزيون المنزلي باستخدام لوح C وتقنية الخشب. توفر الشركة ألواح خشب طبيعية من أنواع خشب صلب من أنواع خشب صلب. هذا تصميم مبتكر يتناسب مع ديكور التلفزيون المحدث. نوفر تقنية خشب عالية عالية, وقوية ومتناسبة. باستخدام تقنية شركة من الشركات الجيدة, يبز التصميم الشقية, والمتناسبة. باستخدام تقنية شركة الشركة الشركة المحدث يصمم التلفزيون. لذلك في كويت, تقنية الخشب أستشر بشكل كثير, ويبحث أن عدد الكثير من المنازل يفضل تصميم ديكور التلفزيون باستخدام لمنزلهم. تواصلو اليوم الحالي بنصل بنا على هواتساب أو رقم عادي 51501463'
+      en: 'This is a television décor design. It is designed on the wall, and once the television is set up, it looks very beautiful. We create the design using different types of boards, such as C-board, fiber, etc. We design home television décor using C-board and wooden technology. The company supplies natural wood boards made from different types of solid wood. It is an innovative design that matches modern home television décor. We provide high-quality wood technology that is very strong, good, and durable. Using good company wood technology, television décor is designed. That is why we provide our customers with excellent service. At competitive prices, we offer them television décor design for their homes. In Kuwait, wood technology has become extremely popular, and many people are looking for professional wood technicians. It is worth mentioning that more than 75% of homes in Kuwait prefer to install television décor designs using wooden boards. Contact us today through WhatsApp or regular number = 55983357',
+      ar: 'هذا تصميم ديكور التلفزيون. تصمم على الجدار وعندما يظهر في الشاشة مع تعين التلفزيون, يبدو جميلا جدا. نوفر التصميم باستخدام أنواع من اللوح, مثل لوح C-بورد, الألياف وغيرها. نصمم ديكور التلفزيون المنزلي باستخدام لوح C وتقنية الخشب. توفر الشركة ألواح خشب طبيعية من أنواع خشب صلب من أنواع خشب صلب. هذا تصميم مبتكر يتناسب مع ديكور التلفزيون المحدث. نوفر تقنية خشب عالية عالية, وقوية ومتناسبة. باستخدام تقنية شركة من الشركات الجيدة, يبز التصميم الشقية, والمتناسبة. باستخدام تقنية شركة الشركة الشركة المحدث يصمم التلفزيون. لذلك في كويت, تقنية الخشب أستشر بشكل كثير, ويبحث أن عدد الكثير من المنازل يفضل تصميم ديكور التلفزيون باستخدام لمنزلهم. تواصلو اليوم الحالي بنصل بنا على هواتساب أو رقم عادي 55983357'
     }
   },
   {
@@ -44,8 +44,8 @@ const servicesData = [
       ar: 'تركيب تصميم الديكور على جدار البيت باستخدام الخشب'
     },
     description: {
-      en: 'We design wall décor for homes using wood technology. The company supplies different types of solid materials, such as natural wood and plastic-like boards. This creates innovative designs that match modern homes. We use high-quality wood technology, which is strong, durable, and reliable. Using good company wood technology, we design wall décor. That is why we provide our customers with excellent service. At competitive prices, we offer them the opportunity to design wall décor for their homes. In Kuwait, wood technology has become extremely popular, and many people are seeking professional wood technicians. It is worth mentioning that more than 75% of homes in Kuwait prefer to install wall décor designs using wood. Contact us today via WhatsApp or our regular number = 51501463',
-      ar: 'نصمم تصميم الديكور على جدار البيت باستخدام تقنية الخشب. توفر الشركة أنواع مختلفة من المتاج الصلبة, مثل الخشب الطبيعي واللوح المتشابه بالبلاستيك. يوفر هذا تصميم مبتكر يتناسب مع الأبنية المحدثة. نستخدم تقنية خشب عالية عالية, وقوية ومتناسبة وموثوقة. باستخدام تقنية الشركة الشركة المحدث يصمم الديكور على الجدار. لذلك نقدم تقديم على زبناء عملائنا بخدم من خدم متميز. في أسعار متناسب الأسعار, نقدم إمكان من تصميم ديكور على جدار البيت. في كويت, أستشر تقنية الخشب بشكل الشعب وأن عدد الأشخاص المتخصصين يبحث عن محترفي خاص الخشب. الرقم للتواصل باليوم يوم اليوم مع الرقم العادي والعادي = 51501463'
+      en: 'We design wall décor for homes using wood technology. The company supplies different types of solid materials, such as natural wood and plastic-like boards. This creates innovative designs that match modern homes. We use high-quality wood technology, which is strong, durable, and reliable. Using good company wood technology, we design wall décor. That is why we provide our customers with excellent service. At competitive prices, we offer them the opportunity to design wall décor for their homes. In Kuwait, wood technology has become extremely popular, and many people are seeking professional wood technicians. It is worth mentioning that more than 75% of homes in Kuwait prefer to install wall décor designs using wood. Contact us today via WhatsApp or our regular number = 55983357',
+      ar: 'نصمم تصميم الديكور على جدار البيت باستخدام تقنية الخشب. توفر الشركة أنواع مختلفة من المتاج الصلبة, مثل الخشب الطبيعي واللوح المتشابه بالبلاستيك. يوفر هذا تصميم مبتكر يتناسب مع الأبنية المحدثة. نستخدم تقنية خشب عالية عالية, وقوية ومتناسبة وموثوقة. باستخدام تقنية الشركة الشركة المحدث يصمم الديكور على الجدار. لذلك نقدم تقديم على زبناء عملائنا بخدم من خدم متميز. في أسعار متناسب الأسعار, نقدم إمكان من تصميم ديكور على جدار البيت. في كويت, أستشر تقنية الخشب بشكل الشعب وأن عدد الأشخاص المتخصصين يبحث عن محترفي خاص الخشب. الرقم للتواصل باليوم يوم اليوم مع الرقم العادي والعادي = 55983357'
     }
   },
   {
@@ -57,8 +57,8 @@ const servicesData = [
       ar: 'نصمم المنازل باستخدام الألياف'
     },
     description: {
-      en: 'We design homes beautifully using fiber, and we also design living rooms. The company supplies high-quality fiber. This creates innovative designs that match modern homes. We use good quality fiber, which is strong, durable, and reliable. Using good company fiber technology, we design homes. That is why we provide our customers with excellent service. At competitive prices, we offer them the opportunity to design their homes using fiber. In Kuwait, fiber technology has become extremely popular, and many people are looking for professional home design technicians using fiber. It is worth mentioning that more than 75% of homes in Kuwait prefer to install designs using fiber. Contact us today via WhatsApp or our regular number = 51501463',
-      ar: 'نصمم المنازل بجمال باستخدام الألياف, ونضم أيضا غرف غرف الغرف غرف للإيغال من الغرف. توفر الشركة توفر ألياف عالية الجودة. هذا ينتج تصميمات مبتكرة تتناسب مع المنازل المحدثة. نستخدم ألياف عالية جيدة, يهي قوية, ومتناسبة, ومتناسبة. باستخدام تقنية الشركة الشركة المحدث يصمم المنازل. لذلك نقدم تقديم على زبناء عملاء من خدم متميز لتصميم المنازل باستخدام الألياف. في كويت, تقنية الألياف أشتر بشكل جدا, ولدية ومتناسبة. هي من الذي أسباب للمزاين العملاء بخدم المتميز باستخدام الألياف. في كويت, تقنية الألياف أشتر شعب وكثير من الأشخاص المتخصصة لتصميم المنازل باستخدام الألياف. هي جديد أن أكثر المنازل في كويت تشتهر تقنية الألياف, ويبحث أن كثير الأشخاص يبحث متخصص لتصميم المنازل باستخدام الألياف. اتصل بنا اليوم مع رقم الهاتف العادي والعادي = 51501463'
+      en: 'We design homes beautifully using fiber, and we also design living rooms. The company supplies high-quality fiber. This creates innovative designs that match modern homes. We use good quality fiber, which is strong, durable, and reliable. Using good company fiber technology, we design homes. That is why we provide our customers with excellent service. At competitive prices, we offer them the opportunity to design their homes using fiber. In Kuwait, fiber technology has become extremely popular, and many people are looking for professional home design technicians using fiber. It is worth mentioning that more than 75% of homes in Kuwait prefer to install designs using fiber. Contact us today via WhatsApp or our regular number = 55983357',
+      ar: 'نصمم المنازل بجمال باستخدام الألياف, ونضم أيضا غرف غرف الغرف غرف للإيغال من الغرف. توفر الشركة توفر ألياف عالية الجودة. هذا ينتج تصميمات مبتكرة تتناسب مع المنازل المحدثة. نستخدم ألياف عالية جيدة, يهي قوية, ومتناسبة, ومتناسبة. باستخدام تقنية الشركة الشركة المحدث يصمم المنازل. لذلك نقدم تقديم على زبناء عملاء من خدم متميز لتصميم المنازل باستخدام الألياف. في كويت, تقنية الألياف أشتر بشكل جدا, ولدية ومتناسبة. هي من الذي أسباب للمزاين العملاء بخدم المتميز باستخدام الألياف. في كويت, تقنية الألياف أشتر شعب وكثير من الأشخاص المتخصصة لتصميم المنازل باستخدام الألياف. هي جديد أن أكثر المنازل في كويت تشتهر تقنية الألياف, ويبحث أن كثير الأشخاص يبحث متخصص لتصميم المنازل باستخدام الألياف. اتصل بنا اليوم مع رقم الهاتف العادي والعادي = 55983357'
     }
   },
   {
@@ -70,8 +70,8 @@ const servicesData = [
       ar: 'تصميم أرضي البيت باستخدام البلاستيك المقاوم من الماء'
     },
     description: {
-      en: 'Folding designs enhance the beauty of home floors. We design homes using waterproof plastic technology. The company supplies strong waterproof plastic. This creates innovative designs that match modern homes. We use high-quality waterproof plastic technology, which is very strong, good, and durable. Using good company waterproof plastic technology, we design floors. That is why we provide our customers with excellent service. At competitive prices, we offer them the opportunity to design their home floors. In Kuwait, waterproof plastic technology has become extremely popular, and many people are looking for professional technicians specializing in waterproof plastic technology. It is worth mentioning that more than 75% of homes in Kuwait prefer to install floors using waterproof plastic. number = 51501463',
-      ar: 'تصميمات اللف تعزز جمال أرضي البيت. نصم المنازل باستخدام تقنية البلاستيك المقاوم. توفر الشركة بلاستيك موقوم والقوية. ينتج هذا تصميمات مبتكرة تتناسب مع المنازل المحدثة. نستخدم تقنية البلاستيك المقاوم العالية, القوية, والمتناسبة. باستخدام تقنية الشركة الشركة المحدث يصمم الأرضي. لذلك نقدم تقديم على زبناء عملاء من خدم المتميز لتصميم أرضي البيت. في كويت, تشتهر تقنية البلاستيك المقاوم تشتر شعب وكثير من الأشخاص المتخصصين لتصميم المنازل باستخدام البلاستيك. هو من الذي لذا نقدم تقديم على زبناء عملاء = 51501463'
+      en: 'Folding designs enhance the beauty of home floors. We design homes using waterproof plastic technology. The company supplies strong waterproof plastic. This creates innovative designs that match modern homes. We use high-quality waterproof plastic technology, which is very strong, good, and durable. Using good company waterproof plastic technology, we design floors. That is why we provide our customers with excellent service. At competitive prices, we offer them the opportunity to design their home floors. In Kuwait, waterproof plastic technology has become extremely popular, and many people are looking for professional technicians specializing in waterproof plastic technology. It is worth mentioning that more than 75% of homes in Kuwait prefer to install floors using waterproof plastic. number = 55983357',
+      ar: 'تصميمات اللف تعزز جمال أرضي البيت. نصم المنازل باستخدام تقنية البلاستيك المقاوم. توفر الشركة بلاستيك موقوم والقوية. ينتج هذا تصميمات مبتكرة تتناسب مع المنازل المحدثة. نستخدم تقنية البلاستيك المقاوم العالية, القوية, والمتناسبة. باستخدام تقنية الشركة الشركة المحدث يصمم الأرضي. لذلك نقدم تقديم على زبناء عملاء من خدم المتميز لتصميم أرضي البيت. في كويت, تشتهر تقنية البلاستيك المقاوم تشتر شعب وكثير من الأشخاص المتخصصين لتصميم المنازل باستخدام البلاستيك. هو من الذي لذا نقدم تقديم على زبناء عملاء = 55983357'
     }
   }
 ];
@@ -87,8 +87,8 @@ const uiStrings = {
     viewPackage: 'View Package',
     callUs: 'Call Us',
     footerText: 'All rights reserved.',
-    metaTitle: 'أرضيات أنيقة | فني تركيب ارضيات خشب وديكورات في الكويت - 51501463',
-    metaDesc: 'شركة أرضيات أنيقة في الكويت - تركيب أرضيات خشب وباركيه طبيعي، ديكورات شاشات وتلفزيون C-Board، ديكور جدران خشب، وتصميم المنازل بالألياف وأرضيات بلاستيك مقاومة للماء. اتصل بنا: 51501463'
+    metaTitle: 'أرضيات أنيقة | فني تركيب ارضيات خشب وديكورات في الكويت - 55983357',
+    metaDesc: 'شركة أرضيات أنيقة في الكويت - تركيب أرضيات خشب وباركيه طبيعي، ديكورات شاشات وتلفزيون C-Board، ديكور جدران خشب، وتصميم المنازل بالألياف وأرضيات بلاستيك مقاومة للماء. اتصل بنا: 55983357'
   },
   en: {
     brandTitle: 'Elegant Floors',
@@ -96,8 +96,8 @@ const uiStrings = {
     viewPackage: 'View Package',
     callUs: 'Call Us',
     footerText: 'All rights reserved.',
-    metaTitle: 'Elegant Floors Kuwait | Wooden Flooring & Wall Decor Specialist - 51501463',
-    metaDesc: 'Elegant Floors in Kuwait offers professional wood parquet flooring installation, C-board TV decor, wall wood paneling, fiber home decor, and waterproof plastic flooring. Call: 51501463'
+    metaTitle: 'Elegant Floors Kuwait | Wooden Flooring & Wall Decor Specialist - 55983357',
+    metaDesc: 'Elegant Floors in Kuwait offers professional wood parquet flooring installation, C-board TV decor, wall wood paneling, fiber home decor, and waterproof plastic flooring. Call: 55983357'
   }
 };
 
