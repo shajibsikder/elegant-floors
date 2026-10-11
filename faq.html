@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -450,7 +450,7 @@
     };
 
     function setPageLanguage(lang) {
-      localStorage.setItem('site_lang', lang);
+      localStorage.setItem('user_selected_lang', lang);
       document.getElementById('btn-en').classList.toggle('active', lang === 'en');
       document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
       document.documentElement.lang = lang;
@@ -475,7 +475,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('site_lang') || 'ar';
+      const saved = new URLSearchParams(window.location.search).get('lang') || localStorage.getItem('user_selected_lang') || 'en';
       setPageLanguage(saved);
     });
   </script>
