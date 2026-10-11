@@ -1,7 +1,7 @@
-# Apache Clean URL Rules for woodflooringhouse.com
-# Removes index.html from all URLs automatically
+# Apache Configuration & SEO Optimization for woodflooringhouse.com
 DirectoryIndex index.html
 DirectorySlash On
+AddDefaultCharset UTF-8
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -14,4 +14,30 @@ DirectorySlash On
   # Redirect /services/name/index.html to /services/name/
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*?)/index\.html [NC]
   RewriteRule ^(.+)/index\.html$ /$1/ [R=301,L]
+</IfModule>
+
+# Gzip / Deflate Compression for Speed & Core Web Vitals
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml
+</IfModule>
+
+# Browser Caching Headers (Improves Core Web Vitals & PageSpeed)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>

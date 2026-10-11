@@ -4,50 +4,66 @@
   <!-- Homepage -->
   <url>
     <loc>https://woodflooringhouse.com/</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/?lang=ar" />
     <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/" />
   </url>
 
-  <!-- Service 1: Wooden Floor Design -->
+  <!-- Service 1: Wooden Flooring & Parquet Installation -->
   <url>
     <loc>https://woodflooringhouse.com/services/wooden-flooring/</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/wooden-flooring/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/wooden-flooring/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/wooden-flooring/" />
   </url>
 
-  <!-- Service 2: TV Wall Decor -->
+  <!-- Service 2: Modern TV Wall Decor with C-Board & Wood Paneling -->
   <url>
     <loc>https://woodflooringhouse.com/services/tv-wall-decor/</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/tv-wall-decor/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/tv-wall-decor/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/tv-wall-decor/" />
   </url>
 
-  <!-- Service 3: Wall Wood Decor -->
+  <!-- Service 3: Wall Wood Decor & Interior Wall Paneling -->
   <url>
     <loc>https://woodflooringhouse.com/services/wall-wood-decor/</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/wall-wood-decor/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/wall-wood-decor/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/wall-wood-decor/" />
   </url>
 
-  <!-- Service 4: Fiber Home Design -->
+  <!-- Service 4: Fiber Home Design & Living Room Decor -->
   <url>
     <loc>https://woodflooringhouse.com/services/fiber-home-design/</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/fiber-home-design/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/fiber-home-design/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/fiber-home-design/" />
   </url>
 
-  <!-- Service 5: Waterproof Plastic Flooring -->
+  <!-- Service 5: Waterproof Plastic & SPC Flooring -->
   <url>
     <loc>https://woodflooringhouse.com/services/waterproof-flooring/</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/waterproof-flooring/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/waterproof-flooring/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/waterproof-flooring/" />
   </url>
 </urlset>
