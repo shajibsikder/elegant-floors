@@ -160,7 +160,7 @@ function renderServices() {
 
   servicesData.forEach((item) => {
     const title = item.title[currentLang] || item.title['en'];
-    const detailUrl = `services/${item.slug}/index.html`;
+    const detailUrl = `services/${item.slug}/`;
 
     const card = document.createElement('article');
     card.className = 'card-item';
