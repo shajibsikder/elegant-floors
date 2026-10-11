@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap URL
-Sitemap: https://elegantfloorskw.com/sitemap.xml
+Sitemap: https://woodflooringhouse.com/sitemap.xml

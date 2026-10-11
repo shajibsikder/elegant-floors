@@ -3,17 +3,17 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <!-- Homepage -->
   <url>
-    <loc>https://elegantfloorskw.com/</loc>
+    <loc>https://woodflooringhouse.com/</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://elegantfloorskw.com/?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://elegantfloorskw.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/?lang=en" />
   </url>
 
   <!-- Service 1: Wooden Floor Design -->
   <url>
-    <loc>https://elegantfloorskw.com/services/wooden-flooring/</loc>
+    <loc>https://woodflooringhouse.com/services/wooden-flooring/</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -21,7 +21,7 @@
 
   <!-- Service 2: TV Wall Decor -->
   <url>
-    <loc>https://elegantfloorskw.com/services/tv-wall-decor/</loc>
+    <loc>https://woodflooringhouse.com/services/tv-wall-decor/</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -29,7 +29,7 @@
 
   <!-- Service 3: Wall Wood Decor -->
   <url>
-    <loc>https://elegantfloorskw.com/services/wall-wood-decor/</loc>
+    <loc>https://woodflooringhouse.com/services/wall-wood-decor/</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -37,7 +37,7 @@
 
   <!-- Service 4: Fiber Home Design -->
   <url>
-    <loc>https://elegantfloorskw.com/services/fiber-home-design/</loc>
+    <loc>https://woodflooringhouse.com/services/fiber-home-design/</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -45,7 +45,7 @@
 
   <!-- Service 5: Waterproof Plastic Flooring -->
   <url>
-    <loc>https://elegantfloorskw.com/services/waterproof-flooring/</loc>
+    <loc>https://woodflooringhouse.com/services/waterproof-flooring/</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
