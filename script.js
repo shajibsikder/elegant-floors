@@ -87,8 +87,8 @@ const uiStrings = {
     viewPackage: 'View Package',
     callUs: 'Call Us',
     footerText: 'All rights reserved.',
-    metaTitle: 'أرضيات أنيقة | فني تركيب ارضيات خشب وديكورات في الكويت - 55983357',
-    metaDesc: 'شركة أرضيات أنيقة في الكويت - تركيب أرضيات خشب وباركيه طبيعي، ديكورات شاشات وتلفزيون C-Board، ديكور جدران خشب، وتصميم المنازل بالألياف وأرضيات بلاستيك مقاومة للماء. اتصل بنا: 55983357'
+    metaTitle: 'أرضيات أنيقة الكويت | فني تركيب ارضيات خشب وديكورات - woodflooringhouse.com - 55983357',
+    metaDesc: 'أرضيات أنيقة الكويت (woodflooringhouse.com) - أفضل فني تركيب وتصميم أرضيات خشب وباركيه طبيعي، ديكورات شاشات وتلفزيون C-Board، ديكور جدران وبديل خشب، وأرضيات بلاستيك مقاومة للماء في الكويت. اتصل: 55983357'
   },
   en: {
     brandTitle: 'Elegant Floors',
@@ -96,8 +96,8 @@ const uiStrings = {
     viewPackage: 'View Package',
     callUs: 'Call Us',
     footerText: 'All rights reserved.',
-    metaTitle: 'Elegant Floors Kuwait | Wooden Flooring & Wall Decor Specialist - 55983357',
-    metaDesc: 'Elegant Floors in Kuwait offers professional wood parquet flooring installation, C-board TV decor, wall wood paneling, fiber home decor, and waterproof plastic flooring. Call: 55983357'
+    metaTitle: 'Elegant Floors Kuwait | Wooden Flooring & Wall Decor - woodflooringhouse.com - 55983357',
+    metaDesc: 'Elegant Floors Kuwait (woodflooringhouse.com) - Professional wood parquet flooring installation, C-board TV decor, wall wood paneling, fiber decor, and waterproof plastic flooring in Kuwait. Call: 55983357'
   }
 };
 
