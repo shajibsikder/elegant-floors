@@ -83,16 +83,26 @@ let currentLang = 'ar';
 const uiStrings = {
   ar: {
     brandTitle: 'Elegant Floors',
-    homeNav: 'Home',
-    viewPackage: 'View Package',
-    callUs: 'Call Us',
-    footerText: 'All rights reserved.',
+    homeNav: 'الرئيسية',
+    servicesNav: 'الخدمات',
+    projectsNav: 'أعمالنا',
+    aboutNav: 'من نحن',
+    faqNav: 'الأسئلة الشائعة',
+    contactNav: 'اتصل بنا',
+    viewPackage: 'عرض التفاصيل',
+    callUs: 'اتصل بنا',
+    footerText: 'جميع الحقوق محفوظة.',
     metaTitle: 'أرضيات أنيقة الكويت | فني تركيب ارضيات خشب وديكورات - woodflooringhouse.com - 55983357',
     metaDesc: 'أرضيات أنيقة الكويت (woodflooringhouse.com) - أفضل فني تركيب وتصميم أرضيات خشب وباركيه طبيعي، ديكورات شاشات وتلفزيون C-Board، ديكور جدران وبديل خشب، وأرضيات بلاستيك مقاومة للماء في الكويت. اتصل: 55983357'
   },
   en: {
     brandTitle: 'Elegant Floors',
     homeNav: 'Home',
+    servicesNav: 'Services',
+    projectsNav: 'Projects',
+    aboutNav: 'About Us',
+    faqNav: 'FAQ',
+    contactNav: 'Contact Us',
     viewPackage: 'View Package',
     callUs: 'Call Us',
     footerText: 'All rights reserved.',
@@ -119,8 +129,8 @@ function setLanguage(lang) {
 
   const htmlRoot = document.documentElement;
   htmlRoot.lang = lang;
-  // Keep layout direction consistent (LTR) to prevent jumping
-  htmlRoot.dir = 'ltr';
+  // Apply direction based on language
+  htmlRoot.dir = (lang === 'ar' ? 'rtl' : 'ltr');
 
   // Toggle active button states
   const btnEn = document.getElementById('btn-en');
@@ -136,8 +146,23 @@ function setLanguage(lang) {
   const h1El = document.getElementById('site-h1');
   if (h1El) h1El.textContent = t.metaTitle;
 
-  const navEl = document.getElementById('nav-home');
-  if (navEl) navEl.textContent = t.homeNav;
+  const navHome = document.getElementById('nav-home');
+  if (navHome) navHome.textContent = t.homeNav;
+
+  const navServices = document.getElementById('nav-services');
+  if (navServices) navServices.textContent = t.servicesNav;
+
+  const navProjects = document.getElementById('nav-projects');
+  if (navProjects) navProjects.textContent = t.projectsNav;
+
+  const navAbout = document.getElementById('nav-about');
+  if (navAbout) navAbout.textContent = t.aboutNav;
+
+  const navFaq = document.getElementById('nav-faq');
+  if (navFaq) navFaq.textContent = t.faqNav;
+
+  const navContact = document.getElementById('nav-contact');
+  if (navContact) navContact.textContent = t.contactNav;
 
   const footerEl = document.getElementById('footer-text');
   if (footerEl) footerEl.innerHTML = `&copy; 2026 <span class="footer-brand">${t.brandTitle}</span>. ${t.footerText}`;

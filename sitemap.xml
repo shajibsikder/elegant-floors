@@ -12,6 +12,72 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/" />
   </url>
 
+  <!-- Services Overview Directory -->
+  <url>
+    <loc>https://woodflooringhouse.com/services.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services.html?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services.html" />
+  </url>
+
+  <!-- Projects / Gallery -->
+  <url>
+    <loc>https://woodflooringhouse.com/projects.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/projects.html?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/projects.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/projects.html" />
+  </url>
+
+  <!-- About Us -->
+  <url>
+    <loc>https://woodflooringhouse.com/about-us.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/about-us.html?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/about-us.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/about-us.html" />
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://woodflooringhouse.com/faq.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/faq.html?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/faq.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/faq.html" />
+  </url>
+
+  <!-- Contact Us & Quote Request -->
+  <url>
+    <loc>https://woodflooringhouse.com/contact.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/contact.html?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/contact.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/contact.html" />
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://woodflooringhouse.com/privacy-policy.html</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/privacy-policy.html?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/privacy-policy.html?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/privacy-policy.html" />
+  </url>
+
   <!-- Service 1: Wooden Flooring & Parquet Installation -->
   <url>
     <loc>https://woodflooringhouse.com/services/wooden-flooring/</loc>

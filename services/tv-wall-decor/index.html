@@ -146,7 +146,12 @@
     <div class="nav-container">
       <a href="../../" class="brand-logo" id="brand-title">Elegant Floors</a>
       <nav class="nav-links">
-        <a href="../../" class="nav-link active" id="nav-home">Home</a>
+        <a href="../../" class="nav-link" id="nav-home">الرئيسية</a>
+        <a href="../../services.html" class="nav-link active" id="nav-services">الخدمات</a>
+        <a href="../../projects.html" class="nav-link" id="nav-projects">أعمالنا</a>
+        <a href="../../about-us.html" class="nav-link" id="nav-about">من نحن</a>
+        <a href="../../faq.html" class="nav-link" id="nav-faq">الأسئلة الشائعة</a>
+        <a href="../../contact.html" class="nav-link" id="nav-contact">اتصل بنا</a>
       </nav>
     </div>
   </header>
@@ -445,10 +450,64 @@
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- Modern Multi-Column Footer -->
   <footer class="footer">
     <div class="container">
-      <p id="footer-text">&copy; 2026 <span class="footer-brand">Elegant Floors Kuwait (woodflooringhouse.com)</span>. All rights reserved.</p>
+      <div class="footer-grid">
+        <!-- Col 1: Brand -->
+        <div class="footer-col">
+          <h3>أرضيات أنيقة الكويت</h3>
+          <p>شركة متخصصة في تركيب وتوريد أرقى الأرضيات الخشبية، باركيه SPC ضد الماء، وديكورات الجدران والشاشات المودرن في الكويت.</p>
+          <div class="footer-contact-item">
+            <strong>هاتف / واتساب:</strong> <a href="tel:55983357">55983357</a>
+          </div>
+          <div class="footer-contact-item">
+            <strong>الموقع:</strong> <a href="https://woodflooringhouse.com/">woodflooringhouse.com</a>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div class="footer-col">
+          <h4>روابط سريعة</h4>
+          <ul class="footer-links-list">
+            <li><a href="../../">الرئيسية</a></li>
+            <li><a href="../../services.html">خدماتنا</a></li>
+            <li><a href="../../projects.html">معرض الأعمال</a></li>
+            <li><a href="../../about-us.html">من نحن</a></li>
+            <li><a href="../../faq.html">الأسئلة الشائعة</a></li>
+            <li><a href="../../contact.html">اتصل بنا</a></li>
+            <li><a href="../../privacy-policy.html">سياسة الخصوصية</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Services -->
+        <div class="footer-col">
+          <h4>خدماتنا في الكويت</h4>
+          <ul class="footer-links-list">
+            <li><a href="../../services/wooden-flooring/">تركيب أرضيات خشب وباركيه</a></li>
+            <li><a href="../../services/tv-wall-decor/">ديكورات شاشات وتلفزيون C-Board</a></li>
+            <li><a href="../../services/wall-wood-decor/">تكسيات جدران خشب وبديل خشب</a></li>
+            <li><a href="../../services/fiber-home-design/">تصميم المنازل بالألياف 3D</a></li>
+            <li><a href="../../services/waterproof-flooring/">أرضيات بلاستيك ضد الماء SPC</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Areas -->
+        <div class="footer-col">
+          <h4>مناطق الخدمة</h4>
+          <p>نغطي كافة مناطق ومحافظات الكويت: العاصمة، حولي، السالمية، الفروانية، الأحمدي، مبارك الكبير، الجهراء.</p>
+          <a href="../../contact.html" class="cta-btn-call" style="display:inline-block; margin-top:8px; padding:8px 16px; font-size:0.88rem;">اطلب معاينة مجانية</a>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 <span class="footer-brand">Elegant Floors Kuwait (woodflooringhouse.com)</span>. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="../../privacy-policy.html">Privacy Policy</a>
+          <a href="../../contact.html">Contact Us</a>
+        </div>
+      </div>
     </div>
   </footer>
 
@@ -483,6 +542,16 @@
       if (callLabel) callLabel.textContent = (lang === 'ar' ? 'اتصل بنا' : 'Call Us');
       const navHome = document.getElementById('nav-home');
       if (navHome) navHome.textContent = (lang === 'ar' ? 'الرئيسية' : 'Home');
+      const navServices = document.getElementById('nav-services');
+      if (navServices) navServices.textContent = (lang === 'ar' ? 'الخدمات' : 'Services');
+      const navProjects = document.getElementById('nav-projects');
+      if (navProjects) navProjects.textContent = (lang === 'ar' ? 'أعمالنا' : 'Projects');
+      const navAbout = document.getElementById('nav-about');
+      if (navAbout) navAbout.textContent = (lang === 'ar' ? 'من نحن' : 'About Us');
+      const navFaq = document.getElementById('nav-faq');
+      if (navFaq) navFaq.textContent = (lang === 'ar' ? 'الأسئلة الشائعة' : 'FAQ');
+      const navContact = document.getElementById('nav-contact');
+      if (navContact) navContact.textContent = (lang === 'ar' ? 'اتصل بنا' : 'Contact Us');
     }
 
     document.addEventListener('DOMContentLoaded', () => {

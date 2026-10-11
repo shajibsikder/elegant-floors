@@ -14,6 +14,11 @@ AddDefaultCharset UTF-8
   # Redirect /services/name/index.html to /services/name/
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*?)/index\.html [NC]
   RewriteRule ^(.+)/index\.html$ /$1/ [R=301,L]
+
+  # Support extensionless URLs (e.g. /about-us -> /about-us.html)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^([^/]+)/?$ $1.html [L]
 </IfModule>
 
 # Gzip / Deflate Compression for Speed & Core Web Vitals
