@@ -11,7 +11,18 @@ AddDefaultCharset UTF-8
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.html [NC]
   RewriteRule ^index\.html$ / [R=301,L]
 
-  # Redirect /services/name/index.html to /services/name/
+  # 301 Permanent Redirects: Old Service URLs to New Keyword-Rich Commercial Routes
+  RewriteRule ^services/wooden-flooring/?.*$ /parquet-flooring-kuwait/ [R=301,L]
+  RewriteRule ^services/waterproof-flooring/?.*$ /spc-flooring-kuwait/ [R=301,L]
+  RewriteRule ^services/tv-wall-decor/?.*$ /tv-wall-decor-kuwait/ [R=301,L]
+  RewriteRule ^services/wall-wood-decor/?.*$ /wpc-wall-panels-kuwait/ [R=301,L]
+  RewriteRule ^services/fiber-home-design/?.*$ /3d-wall-panels-kuwait/ [R=301,L]
+
+  # 301 Permanent Redirects: Legacy Stub Pages to Services
+  RewriteRule ^faq(\.html)?$ /services.html [R=301,L]
+  RewriteRule ^projects(\.html)?$ /services.html [R=301,L]
+
+  # Redirect /path/index.html to /path/
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*?)/index\.html [NC]
   RewriteRule ^(.+)/index\.html$ /$1/ [R=301,L]
 

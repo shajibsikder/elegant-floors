@@ -4,7 +4,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://woodflooringhouse.com/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/?lang=ar" />
@@ -15,7 +15,7 @@
   <!-- Services Overview Directory -->
   <url>
     <loc>https://woodflooringhouse.com/services.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services.html?lang=ar" />
@@ -23,21 +23,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services.html" />
   </url>
 
-  <!-- Projects / Gallery -->
-  <url>
-    <loc>https://woodflooringhouse.com/projects.html</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/projects.html?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/projects.html?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/projects.html" />
-  </url>
-
   <!-- About Us -->
   <url>
     <loc>https://woodflooringhouse.com/about-us.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/about-us.html?lang=ar" />
@@ -45,21 +34,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/about-us.html" />
   </url>
 
-  <!-- FAQ -->
-  <url>
-    <loc>https://woodflooringhouse.com/faq.html</loc>
-    <lastmod>2026-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/faq.html?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/faq.html?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/faq.html" />
-  </url>
-
   <!-- Contact Us & Quote Request -->
   <url>
     <loc>https://woodflooringhouse.com/contact.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/contact.html?lang=ar" />
@@ -70,7 +48,7 @@
   <!-- Privacy Policy -->
   <url>
     <loc>https://woodflooringhouse.com/privacy-policy.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/privacy-policy.html?lang=ar" />
@@ -78,58 +56,58 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/privacy-policy.html" />
   </url>
 
-  <!-- Service 1: Wooden Flooring & Parquet Installation -->
+  <!-- Service 1: Parquet Flooring Installation in Kuwait -->
   <url>
-    <loc>https://woodflooringhouse.com/services/wooden-flooring/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://woodflooringhouse.com/parquet-flooring-kuwait/</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/wooden-flooring/?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/wooden-flooring/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/wooden-flooring/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/parquet-flooring-kuwait/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/parquet-flooring-kuwait/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/parquet-flooring-kuwait/" />
   </url>
 
-  <!-- Service 2: Modern TV Wall Decor with C-Board & Wood Paneling -->
+  <!-- Service 2: Waterproof SPC Flooring in Kuwait -->
   <url>
-    <loc>https://woodflooringhouse.com/services/tv-wall-decor/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://woodflooringhouse.com/spc-flooring-kuwait/</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/tv-wall-decor/?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/tv-wall-decor/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/tv-wall-decor/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/spc-flooring-kuwait/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/spc-flooring-kuwait/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/spc-flooring-kuwait/" />
   </url>
 
-  <!-- Service 3: Wall Wood Decor & Interior Wall Paneling -->
+  <!-- Service 3: TV Wall Decor & Panel Installation in Kuwait -->
   <url>
-    <loc>https://woodflooringhouse.com/services/wall-wood-decor/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://woodflooringhouse.com/tv-wall-decor-kuwait/</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/wall-wood-decor/?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/wall-wood-decor/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/wall-wood-decor/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/tv-wall-decor-kuwait/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/tv-wall-decor-kuwait/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/tv-wall-decor-kuwait/" />
   </url>
 
-  <!-- Service 4: Fiber Home Design & Living Room Decor -->
+  <!-- Service 4: Wood & WPC Wall Panel Installation in Kuwait -->
   <url>
-    <loc>https://woodflooringhouse.com/services/fiber-home-design/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://woodflooringhouse.com/wpc-wall-panels-kuwait/</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/fiber-home-design/?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/fiber-home-design/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/fiber-home-design/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/wpc-wall-panels-kuwait/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/wpc-wall-panels-kuwait/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/wpc-wall-panels-kuwait/" />
   </url>
 
-  <!-- Service 5: Waterproof Plastic & SPC Flooring -->
+  <!-- Service 5: 3D Decorative Wall Panels in Kuwait -->
   <url>
-    <loc>https://woodflooringhouse.com/services/waterproof-flooring/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://woodflooringhouse.com/3d-wall-panels-kuwait/</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/services/waterproof-flooring/?lang=ar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/services/waterproof-flooring/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/services/waterproof-flooring/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://woodflooringhouse.com/3d-wall-panels-kuwait/?lang=ar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://woodflooringhouse.com/3d-wall-panels-kuwait/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://woodflooringhouse.com/3d-wall-panels-kuwait/" />
   </url>
 </urlset>
