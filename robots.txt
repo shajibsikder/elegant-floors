@@ -1,6 +1,5 @@
-# Robots.txt for Elegant Floors Kuwait
+# Robots.txt — أرضيات أنيقة
 User-agent: *
 Allow: /
 
-# Sitemap URL
 Sitemap: https://woodflooringhouse.com/sitemap.xml

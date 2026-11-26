@@ -1,59 +1,180 @@
-# Apache Configuration & SEO Optimization for woodflooringhouse.com
-DirectoryIndex index.html
-DirectorySlash On
 AddDefaultCharset UTF-8
-
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-
-  # Redirect /index.html to /
-  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.html [NC]
-  RewriteRule ^index\.html$ / [R=301,L]
-
-  # 301 Permanent Redirects: Old Service URLs to New Keyword-Rich Commercial Routes
-  RewriteRule ^services/wooden-flooring/?.*$ /parquet-flooring-kuwait/ [R=301,L]
-  RewriteRule ^services/waterproof-flooring/?.*$ /spc-flooring-kuwait/ [R=301,L]
-  RewriteRule ^services/tv-wall-decor/?.*$ /tv-wall-decor-kuwait/ [R=301,L]
-  RewriteRule ^services/wall-wood-decor/?.*$ /wpc-wall-panels-kuwait/ [R=301,L]
-  RewriteRule ^services/fiber-home-design/?.*$ /3d-wall-panels-kuwait/ [R=301,L]
-
-  # 301 Permanent Redirects: Legacy Stub Pages to Services
-  RewriteRule ^faq(\.html)?$ /services.html [R=301,L]
-  RewriteRule ^projects(\.html)?$ /services.html [R=301,L]
-
-  # Redirect /path/index.html to /path/
-  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.*?)/index\.html [NC]
-  RewriteRule ^(.+)/index\.html$ /$1/ [R=301,L]
-
-  # Support extensionless URLs (e.g. /about-us -> /about-us.html)
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME}\.html -f
-  RewriteRule ^([^/]+)/?$ $1.html [L]
+<IfModule mod_mime.c>
+  AddCharset UTF-8 .html .css .js .xml .json
 </IfModule>
 
-# Gzip / Deflate Compression for Speed & Core Web Vitals
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml
-</IfModule>
+RewriteEngine On
 
-# Browser Caching Headers (Improves Core Web Vitals & PageSpeed)
-<IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType image/jpg "access plus 1 year"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType text/javascript "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
-  ExpiresByType text/html "access plus 0 seconds"
-</IfModule>
+# Force HTTPS and non-www in a single 301 hop
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://woodflooringhouse.com%{REQUEST_URI} [NE,R=301,L]
 
-# Security Headers
-<IfModule mod_headers.c>
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set X-Frame-Options "SAMEORIGIN"
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-</IfModule>
+# 301 Redirects for direct requests to /_pages/... (using THE_REQUEST so internal rewrites keep working)
+RewriteCond %{THE_REQUEST} \s/+_pages/services-hub(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/service-1(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/service-2(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A3%D8%B1%D8%B6%D9%8A%D8%A7%D8%AA-spc-%D8%B6%D8%AF-%D8%A7%D9%84%D9%85%D8%A7%D8%A1-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/service-3(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%AF%D9%8A%D9%83%D9%88%D8%B1-%D8%AE%D9%84%D9%81%D9%8A%D8%A9-%D8%B4%D8%A7%D8%B4%D8%A9-%D8%AA%D9%84%D9%81%D8%B2%D9%8A%D9%88%D9%86-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/service-4(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%AA%D9%83%D8%B3%D9%8A%D8%A7%D8%AA-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%A8%D8%AF%D9%8A%D9%84-%D8%A7%D9%84%D8%AE%D8%B4%D8%A8-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/service-5(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%AF%D9%8A%D9%83%D9%88%D8%B1-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%AB%D9%84%D8%A7%D8%AB%D9%8A-%D8%A7%D9%84%D8%A3%D8%A8%D8%B9%D8%A7%D8%AF-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/service-6(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D9%88%D8%B1%D9%82-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/service-7(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D9%88%D8%B2%D8%B1%D8%A9-%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/areas-hub(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-1(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D8%B9%D8%A7%D8%B5%D9%85%D8%A9/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-2(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%AD%D9%88%D9%84%D9%8A/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-3(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D9%81%D8%B1%D9%88%D8%A7%D9%86%D9%8A%D8%A9/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-4(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D9%85%D8%A8%D8%A7%D8%B1%D9%83-%D8%A7%D9%84%D9%83%D8%A8%D9%8A%D8%B1/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-5(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D8%A3%D8%AD%D9%85%D8%AF%D9%8A/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-6(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D8%AC%D9%87%D8%B1%D8%A7%D8%A1/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-7(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D8%B3%D8%A7%D9%84%D9%85%D9%8A%D8%A9/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-8(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%B5%D8%A8%D8%A7%D8%AD-%D8%A7%D9%84%D8%B3%D8%A7%D9%84%D9%85/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-9(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D9%81%D8%AD%D9%8A%D8%AD%D9%8A%D9%84/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-10(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D9%85%D9%86%D9%82%D9%81/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-11(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%AE%D9%8A%D8%B7%D8%A7%D9%86/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-12(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D9%8A%D8%A9/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-13(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A8%D9%8A%D8%A7%D9%86/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/area-14(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D9%85%D8%B4%D8%B1%D9%81/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-hub(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-1(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D9%84%D9%8A%D8%B4-%D8%A7%D9%84%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D9%8A%D8%B7%D9%82%D8%B7%D9%82-%D8%A3%D9%88-%D9%8A%D9%86%D8%AA%D9%81%D8%AE-%D8%A8%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-2(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D8%A7%D9%84%D9%81%D8%B1%D9%82-%D8%A8%D9%8A%D9%86-%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-hdf-%D9%88%D8%A3%D8%B1%D8%B6%D9%8A%D8%A7%D8%AA-spc/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-3(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D9%87%D9%84-%D8%A7%D9%84%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D9%8A%D8%B5%D9%84%D8%AD-%D9%84%D9%84%D9%85%D8%B7%D8%A8%D8%AE-%D9%88%D8%A7%D9%84%D8%AD%D9%85%D8%A7%D9%85/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-4(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D9%81%D9%88%D9%82-%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A7%D9%85%D9%8A%D9%83-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-5(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D9%83%D9%85-%D8%B3%D8%B9%D8%B1-%D9%85%D8%AA%D8%B1-%D8%A7%D9%84%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D9%81%D9%8A-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-6(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D8%A7%D9%84%D9%81%D8%B1%D9%82-%D8%A8%D9%8A%D9%86-%D8%A3%D8%B1%D8%B6%D9%8A%D8%A7%D8%AA-spc-%D9%88%D8%A7%D9%84%D9%81%D9%8A%D9%86%D9%8A%D9%84-%D8%A7%D9%84%D8%B1%D9%88%D9%84/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-7(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D8%A3%D9%81%D9%83%D8%A7%D8%B1-%D8%AF%D9%8A%D9%83%D9%88%D8%B1-%D8%AE%D9%84%D9%81%D9%8A%D8%A9-%D8%B4%D8%A7%D8%B4%D8%A9-%D8%A7%D9%84%D8%AA%D9%84%D9%81%D8%B2%D9%8A%D9%88%D9%86/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-8(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D9%87%D9%84-%D8%A8%D8%AF%D9%8A%D9%84-%D8%A7%D9%84%D8%AE%D8%B4%D8%A8-wpc-%D9%8A%D8%AA%D8%AD%D9%85%D9%84-%D8%AC%D9%88-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-9(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D9%83%D9%85-%D9%8A%D8%B9%D9%8A%D8%B4-%D8%A7%D9%84%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D9%88%D8%B7%D8%B1%D9%8A%D9%82%D8%A9-%D8%AA%D9%86%D8%B8%D9%8A%D9%81%D9%87/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/blog-10(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D9%88%D9%84%D8%A7-%D8%B3%D9%8A%D8%B1%D8%A7%D9%85%D9%8A%D9%83-%D8%A3%D9%8A%D9%87%D9%85%D8%A7-%D8%A3%D9%81%D8%B6%D9%84-%D9%84%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/pricing(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A3%D8%B3%D8%B9%D8%A7%D8%B1-%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D8%A7%D9%84%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/gallery(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D8%B9%D8%B1%D8%B6-%D8%A7%D9%84%D8%A3%D8%B9%D9%85%D8%A7%D9%84/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/faq(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D9%84%D8%A3%D8%B3%D8%A6%D9%84%D8%A9-%D8%A7%D9%84%D8%B4%D8%A7%D8%A6%D8%B9%D8%A9/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/about(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D9%85%D9%86-%D9%86%D8%AD%D9%86/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/contact(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%A7%D8%AA%D8%B5%D9%84-%D8%A8%D9%86%D8%A7/ [NE,R=301,L]
+RewriteCond %{THE_REQUEST} \s/+_pages/privacy(?:/|/index\.html)?[\s?] [NC]
+RewriteRule ^ /%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9-%D8%A7%D9%84%D8%AE%D8%B5%D9%88%D8%B5%D9%8A%D8%A9/ [NE,R=301,L]
+
+# 301 Redirects from old English, /ar/, and transliterated URLs to Arabic keyword URLs
+RewriteRule ^parquet-flooring-kuwait/?$ /%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^spc-flooring-kuwait/?$ /%D8%A3%D8%B1%D8%B6%D9%8A%D8%A7%D8%AA-spc-%D8%B6%D8%AF-%D8%A7%D9%84%D9%85%D8%A7%D8%A1-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^tv-wall-decor-kuwait/?$ /%D8%AF%D9%8A%D9%83%D9%88%D8%B1-%D8%AE%D9%84%D9%81%D9%8A%D8%A9-%D8%B4%D8%A7%D8%B4%D8%A9-%D8%AA%D9%84%D9%81%D8%B2%D9%8A%D9%88%D9%86-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^wpc-wall-panels-kuwait/?$ /%D8%AA%D9%83%D8%B3%D9%8A%D8%A7%D8%AA-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%A8%D8%AF%D9%8A%D9%84-%D8%A7%D9%84%D8%AE%D8%B4%D8%A8-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^3d-wall-panels-kuwait/?$ /%D8%AF%D9%8A%D9%83%D9%88%D8%B1-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%AB%D9%84%D8%A7%D8%AB%D9%8A-%D8%A7%D9%84%D8%A3%D8%A8%D8%B9%D8%A7%D8%AF-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^ar/tarkib-barkieh-alkuwait/?$ /%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^ar/ardiyat-spc-alkuwait/?$ /%D8%A3%D8%B1%D8%B6%D9%8A%D8%A7%D8%AA-spc-%D8%B6%D8%AF-%D8%A7%D9%84%D9%85%D8%A7%D8%A1-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^ar/dikorat-shasha-alkuwait/?$ /%D8%AF%D9%8A%D9%83%D9%88%D8%B1-%D8%AE%D9%84%D9%81%D9%8A%D8%A9-%D8%B4%D8%A7%D8%B4%D8%A9-%D8%AA%D9%84%D9%81%D8%B2%D9%8A%D9%88%D9%86-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^ar/taksiyat-judran-alkuwait/?$ /%D8%AA%D9%83%D8%B3%D9%8A%D8%A7%D8%AA-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%A8%D8%AF%D9%8A%D9%84-%D8%A7%D9%84%D8%AE%D8%B4%D8%A8-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^ar/judran-3d-alkuwait/?$ /%D8%AF%D9%8A%D9%83%D9%88%D8%B1-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%AB%D9%84%D8%A7%D8%AB%D9%8A-%D8%A7%D9%84%D8%A3%D8%A8%D8%B9%D8%A7%D8%AF-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^tarkib-barkieh-alkuwait/?$ /%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^ardiyat-spc-alkuwait/?$ /%D8%A3%D8%B1%D8%B6%D9%8A%D8%A7%D8%AA-spc-%D8%B6%D8%AF-%D8%A7%D9%84%D9%85%D8%A7%D8%A1-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^dikorat-shasha-alkuwait/?$ /%D8%AF%D9%8A%D9%83%D9%88%D8%B1-%D8%AE%D9%84%D9%81%D9%8A%D8%A9-%D8%B4%D8%A7%D8%B4%D8%A9-%D8%AA%D9%84%D9%81%D8%B2%D9%8A%D9%88%D9%86-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^taksiyat-judran-alkuwait/?$ /%D8%AA%D9%83%D8%B3%D9%8A%D8%A7%D8%AA-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%A8%D8%AF%D9%8A%D9%84-%D8%A7%D9%84%D8%AE%D8%B4%D8%A8-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^judran-3d-alkuwait/?$ /%D8%AF%D9%8A%D9%83%D9%88%D8%B1-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%AB%D9%84%D8%A7%D8%AB%D9%8A-%D8%A7%D9%84%D8%A3%D8%A8%D8%B9%D8%A7%D8%AF-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^warq-judran-alkuwait/?$ /%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D9%88%D8%B1%D9%82-%D8%AC%D8%AF%D8%B1%D8%A7%D9%86-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^tarkib-wazra-alkuwait/?$ /%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D9%88%D8%B2%D8%B1%D8%A9-%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^services\.html$ /%D8%A7%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA/ [NE,R=301,L]
+RewriteRule ^services/?$ /%D8%A7%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA/ [NE,R=301,L]
+RewriteRule ^about-us\.html$ /%D9%85%D9%86-%D9%86%D8%AD%D9%86/ [NE,R=301,L]
+RewriteRule ^man-nahnu/?$ /%D9%85%D9%86-%D9%86%D8%AD%D9%86/ [NE,R=301,L]
+RewriteRule ^contact\.html$ /%D8%A7%D8%AA%D8%B5%D9%84-%D8%A8%D9%86%D8%A7/ [NE,R=301,L]
+RewriteRule ^ittasil-bina/?$ /%D8%A7%D8%AA%D8%B5%D9%84-%D8%A8%D9%86%D8%A7/ [NE,R=301,L]
+RewriteRule ^faq\.html$ /%D8%A7%D9%84%D8%A3%D8%B3%D8%A6%D9%84%D8%A9-%D8%A7%D9%84%D8%B4%D8%A7%D8%A6%D8%B9%D8%A9/ [NE,R=301,L]
+RewriteRule ^al-asela/?$ /%D8%A7%D9%84%D8%A3%D8%B3%D8%A6%D9%84%D8%A9-%D8%A7%D9%84%D8%B4%D8%A7%D8%A6%D8%B9%D8%A9/ [NE,R=301,L]
+RewriteRule ^projects\.html$ /%D9%85%D8%B9%D8%B1%D8%B6-%D8%A7%D9%84%D8%A3%D8%B9%D9%85%D8%A7%D9%84/ [NE,R=301,L]
+RewriteRule ^al-maarid/?$ /%D9%85%D8%B9%D8%B1%D8%B6-%D8%A7%D9%84%D8%A3%D8%B9%D9%85%D8%A7%D9%84/ [NE,R=301,L]
+RewriteRule ^privacy-policy\.html$ /%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9-%D8%A7%D9%84%D8%AE%D8%B5%D9%88%D8%B5%D9%8A%D8%A9/ [NE,R=301,L]
+RewriteRule ^siyasat-alkhususiya/?$ /%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9-%D8%A7%D9%84%D8%AE%D8%B5%D9%88%D8%B5%D9%8A%D8%A9/ [NE,R=301,L]
+RewriteRule ^as-aar-albarkieh/?$ /%D8%A3%D8%B3%D8%B9%D8%A7%D8%B1-%D8%AA%D8%B1%D9%83%D9%8A%D8%A8-%D8%A7%D9%84%D8%A8%D8%A7%D8%B1%D9%83%D9%8A%D9%87-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^al-mudawana/?$ /%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9/ [NE,R=301,L]
+RewriteRule ^manatiq/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/ [NE,R=301,L]
+RewriteRule ^manatiq/hawalli/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%AD%D9%88%D9%84%D9%8A/ [NE,R=301,L]
+RewriteRule ^manatiq/salmiya/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D8%B3%D8%A7%D9%84%D9%85%D9%8A%D8%A9/ [NE,R=301,L]
+RewriteRule ^manatiq/farwaniya/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D9%81%D8%B1%D9%88%D8%A7%D9%86%D9%8A%D8%A9/ [NE,R=301,L]
+RewriteRule ^manatiq/jahra/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D8%AC%D9%87%D8%B1%D8%A7%D8%A1/ [NE,R=301,L]
+RewriteRule ^manatiq/ahmadi/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D8%A3%D8%AD%D9%85%D8%AF%D9%8A/ [NE,R=301,L]
+RewriteRule ^manatiq/mubarak-al-kabeer/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D9%85%D8%A8%D8%A7%D8%B1%D9%83-%D8%A7%D9%84%D9%83%D8%A8%D9%8A%D8%B1/ [NE,R=301,L]
+RewriteRule ^manatiq/kuwait-city/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D8%B9%D8%A7%D8%B5%D9%85%D8%A9/ [NE,R=301,L]
+RewriteRule ^manatiq/sabah-al-salem/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%B5%D8%A8%D8%A7%D8%AD-%D8%A7%D9%84%D8%B3%D8%A7%D9%84%D9%85/ [NE,R=301,L]
+RewriteRule ^manatiq/fahaheel-mangaf/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A7%D9%84%D9%81%D8%AD%D9%8A%D8%AD%D9%8A%D9%84/ [NE,R=301,L]
+RewriteRule ^manatiq/khaitan-rabiya/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%AE%D9%8A%D8%B7%D8%A7%D9%86/ [NE,R=301,L]
+RewriteRule ^manatiq/bayan-mishref/?$ /%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/%D8%A8%D9%8A%D8%A7%D9%86/ [NE,R=301,L]
+
+# Internal rewrites from Arabic keyword URLs to ASCII-safe _pages/ files (200 OK)
+RewriteRule ^الخدمات/?$ _pages/services-hub/index.html [L]
+RewriteRule ^تركيب-باركيه-الكويت/?$ _pages/service-1/index.html [L]
+RewriteRule ^أرضيات-spc-ضد-الماء-الكويت/?$ _pages/service-2/index.html [L]
+RewriteRule ^ديكور-خلفية-شاشة-تلفزيون-الكويت/?$ _pages/service-3/index.html [L]
+RewriteRule ^تكسيات-جدران-بديل-الخشب-الكويت/?$ _pages/service-4/index.html [L]
+RewriteRule ^ديكور-جدران-ثلاثي-الأبعاد-الكويت/?$ _pages/service-5/index.html [L]
+RewriteRule ^تركيب-ورق-جدران-الكويت/?$ _pages/service-6/index.html [L]
+RewriteRule ^تركيب-وزرة-باركيه-الكويت/?$ _pages/service-7/index.html [L]
+RewriteRule ^مناطق-الكويت/?$ _pages/areas-hub/index.html [L]
+RewriteRule ^مناطق-الكويت/العاصمة/?$ _pages/area-1/index.html [L]
+RewriteRule ^مناطق-الكويت/حولي/?$ _pages/area-2/index.html [L]
+RewriteRule ^مناطق-الكويت/الفروانية/?$ _pages/area-3/index.html [L]
+RewriteRule ^مناطق-الكويت/مبارك-الكبير/?$ _pages/area-4/index.html [L]
+RewriteRule ^مناطق-الكويت/الأحمدي/?$ _pages/area-5/index.html [L]
+RewriteRule ^مناطق-الكويت/الجهراء/?$ _pages/area-6/index.html [L]
+RewriteRule ^مناطق-الكويت/السالمية/?$ _pages/area-7/index.html [L]
+RewriteRule ^مناطق-الكويت/صباح-السالم/?$ _pages/area-8/index.html [L]
+RewriteRule ^مناطق-الكويت/الفحيحيل/?$ _pages/area-9/index.html [L]
+RewriteRule ^مناطق-الكويت/المنقف/?$ _pages/area-10/index.html [L]
+RewriteRule ^مناطق-الكويت/خيطان/?$ _pages/area-11/index.html [L]
+RewriteRule ^مناطق-الكويت/الرابية/?$ _pages/area-12/index.html [L]
+RewriteRule ^مناطق-الكويت/بيان/?$ _pages/area-13/index.html [L]
+RewriteRule ^مناطق-الكويت/مشرف/?$ _pages/area-14/index.html [L]
+RewriteRule ^المدونة/?$ _pages/blog-hub/index.html [L]
+RewriteRule ^المدونة/ليش-الباركيه-يطقطق-أو-ينتفخ-بالكويت/?$ _pages/blog-1/index.html [L]
+RewriteRule ^المدونة/الفرق-بين-باركيه-hdf-وأرضيات-spc/?$ _pages/blog-2/index.html [L]
+RewriteRule ^المدونة/هل-الباركيه-يصلح-للمطبخ-والحمام/?$ _pages/blog-3/index.html [L]
+RewriteRule ^المدونة/تركيب-باركيه-فوق-السيراميك-الكويت/?$ _pages/blog-4/index.html [L]
+RewriteRule ^المدونة/كم-سعر-متر-الباركيه-في-الكويت/?$ _pages/blog-5/index.html [L]
+RewriteRule ^المدونة/الفرق-بين-أرضيات-spc-والفينيل-الرول/?$ _pages/blog-6/index.html [L]
+RewriteRule ^المدونة/أفكار-ديكور-خلفية-شاشة-التلفزيون/?$ _pages/blog-7/index.html [L]
+RewriteRule ^المدونة/هل-بديل-الخشب-wpc-يتحمل-جو-الكويت/?$ _pages/blog-8/index.html [L]
+RewriteRule ^المدونة/كم-يعيش-الباركيه-وطريقة-تنظيفه/?$ _pages/blog-9/index.html [L]
+RewriteRule ^المدونة/باركيه-ولا-سيراميك-أيهما-أفضل-للكويت/?$ _pages/blog-10/index.html [L]
+RewriteRule ^أسعار-تركيب-الباركيه-الكويت/?$ _pages/pricing/index.html [L]
+RewriteRule ^معرض-الأعمال/?$ _pages/gallery/index.html [L]
+RewriteRule ^الأسئلة-الشائعة/?$ _pages/faq/index.html [L]
+RewriteRule ^من-نحن/?$ _pages/about/index.html [L]
+RewriteRule ^اتصل-بنا/?$ _pages/contact/index.html [L]
+RewriteRule ^سياسة-الخصوصية/?$ _pages/privacy/index.html [L]
