@@ -175,7 +175,7 @@ function buildFooter() {
         </div>
         <div>
           <h4>مناطق الخدمة</h4>
-          <ul>${areaLinks}</ul>
+          <p>نقدم خدماتنا في جميع مناطق الكويت. نقوم بتوريد وتركيب الباركيه، أرضيات SPC، أرضيات PVC، والديكورات الداخلية، وكذلك خدمة رفع وتركيب الباركيه في جميع مناطق الكويت</p>
         </div>
         <div>
           <h4>روابط مهمة</h4>
@@ -330,9 +330,9 @@ function generateHome() {
     <article class="card">
       ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" loading="lazy" width="400" height="250">` : ''}
       <div class="card-body">
-        <span class="card-badge">${esc(s.badge)}</span>
-        <h3>${esc(s.shortName)}</h3>
-        <p>${esc(s.summary)}</p>
+        <span class="card-badge">${esc(s.cardBadge || s.badge)}</span>
+        <h3>${esc(s.cardTitle || s.shortName)}</h3>
+        <p>${esc(s.cardSummary || s.summary)}</p>
         <a href="${toHref('/' + s.slug + '/')}" class="card-link">عرض تفاصيل الخدمة ←</a>
       </div>
     </article>`).join('');
@@ -513,9 +513,9 @@ function generateServices() {
     <article class="card">
       ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" loading="lazy">` : ''}
       <div class="card-body">
-        <span class="card-badge">${esc(s.badge)}</span>
-        <h3>${esc(s.shortName)}</h3>
-        <p>${esc(s.summary)}</p>
+        <span class="card-badge">${esc(s.cardBadge || s.badge)}</span>
+        <h3>${esc(s.cardTitle || s.shortName)}</h3>
+        <p>${esc(s.cardSummary || s.summary)}</p>
         <a href="${toHref('/' + s.slug + '/')}" class="card-link">عرض التفاصيل ←</a>
       </div>
     </article>`).join('') + `
@@ -544,8 +544,8 @@ function generateServices() {
     <div class="page-hero">
       <div class="container">
         <div class="breadcrumbs"><a href="/">الرئيسية</a> / <span>خدماتنا</span></div>
-        <h1>خدمات الأرضيات وتكسيات الجدران في الكويت</h1>
-        <p>توريد وتركيب في كافة محافظات الكويت — ${esc(site.kuwaitOnlyNote)}.</p>
+        <h1>خدمات تركيب وبيع الباركيه والأرضيات والديكورات في الكويت – 55983357</h1>
+        <p>نقدم أفضل خدمات توريد وبيع وتركيب جميع أنواع الباركيه والأرضيات الخشبية والبلاستيكية (SPC وPVC) في الكويت، بالإضافة إلى ديكورات الجدران وبديل الخشب وبديل الرخام. نوفر تصاميم عصرية وخامات عالية الجودة مع أسعار مناسبة وخدمة تركيب احترافية، وصيانة وفك ونقل الباركيه. خدماتنا متوفرة في جميع محافظات الكويت.</p>
       </div>
     </div>
     <section class="section"><div class="container"><div class="cards-grid">${hubCards}</div></div></section>
@@ -841,8 +841,8 @@ function generateAreas() {
         ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" loading="lazy">` : ''}
         <div class="card-body">
           <span class="card-badge">${esc(a.governorate)}</span>
-          <h3>${esc(s.shortName)}</h3>
-          <p>${esc(s.summary)}</p>
+          <h3>${esc(s.cardTitle || s.shortName)}</h3>
+          <p>${esc(s.cardSummary || s.summary)}</p>
           <a href="${toHref('/' + s.slug + '/')}" class="card-link">تفاصيل الخدمة ←</a>
         </div>
       </article>`).join('');
@@ -1059,7 +1059,7 @@ function generateSupportingPages() {
   const galleryImgs = services.filter(s => s.image).map(s => ({
     src: s.image,
     alt: s.imageAlt,
-    label: s.shortName
+    label: s.galleryBadge || s.cardBadge || s.shortName
   }));
   writeHtml('معرض-الأعمال/index.html', galHead + `<body>
   ${buildHeader('/معرض-الأعمال/')}
