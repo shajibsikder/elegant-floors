@@ -193,6 +193,7 @@ function buildFooter() {
       <div class="footer-bottom">
         <span>&copy; 2026 ${esc(site.brandName)} — جميع الحقوق محفوظة.</span>
         <span>${esc(site.kuwaitOnlyNote)}</span>
+        <span dir="ltr">Developed by <a href="https://tech.weekmotion.com/" target="_blank" rel="noopener" style="color:#fcd34d;font-weight:600;text-decoration:underline;">Weekmotion Tech</a></span>
       </div>
     </div>
   </footer>
