@@ -124,7 +124,7 @@ function buildHeader(activePath) {
   <div class="top-bar">
     <div class="container top-bar-inner">
       <span>${esc(site.kuwaitOnlyNote)}</span>
-      <span>هاتف وواتساب: <a href="tel:+965${site.phone}">+965 ${site.phone}</a></span>
+      <span>هاتف وواتساب: <a href="tel:+965${site.phone}" dir="ltr">+965 ${site.phone}</a></span>
     </div>
   </div>
   <header class="navbar">
@@ -161,7 +161,7 @@ function buildFooter() {
         <div>
           <h3>${esc(site.brandName)}</h3>
           <p>متخصصون في توريد وتركيب الباركيه، أرضيات SPC، ديكور خلفية التلفزيون، ألواح WPC للجدران، ورق الجدران، ووزرات الأرضيات في الكويت.</p>
-          <p><strong>الهاتف / واتساب:</strong> <a href="tel:+965${site.phone}">+965 ${site.phone}</a></p>
+          <p><strong>الهاتف / واتساب:</strong> <a href="tel:+965${site.phone}" dir="ltr">+965 ${site.phone}</a></p>
           <p style="color:#fcd34d;font-size:0.88rem;font-weight:700;">${esc(site.kuwaitOnlyNote)}</p>
         </div>
         <div>
@@ -951,7 +951,7 @@ function generateSupportingPages() {
       <div class="container">
         <div class="breadcrumbs"><a href="/">الرئيسية</a> / <span>اتصل بنا</span></div>
         <h1>تواصل معنا لطلب معاينة وعرض سعر</h1>
-        <p>الهاتف والواتساب: <strong>+965 ${site.phone}</strong> — ${esc(site.workingHours)}</p>
+        <p>الهاتف والواتساب: <strong dir="ltr">+965 ${site.phone}</strong> — ${esc(site.workingHours)}</p>
         ${kuwaitNoteBoxHtml()}
         <div class="hero-actions" style="margin-top:14px;">
           <a href="tel:+965${site.phone}" class="btn-gold">اتصل الآن</a>
