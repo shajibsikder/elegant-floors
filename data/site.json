@@ -15,7 +15,9 @@
     "laminateSold": false,
     "engineeredWoodSold": false,
     "mdfSkirtingSold": false,
-    "pvcSkirtingSold": false
+    "pvcSkirtingSold": false,
+    "ceilingDecorSold": false,
+    "concealedLightingSold": false
   },
   "locale": "ar_KW",
   "lang": "ar-KW",

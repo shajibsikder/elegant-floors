@@ -92,7 +92,7 @@ function buildHead({ title, description, canonicalPath, ogImage, schemaGraph, in
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${imgUrl}">
   <meta name="theme-color" content="${site.themeColor}">
-  <link rel="icon" type="image/jpeg" href="/images/1.jpg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
@@ -322,7 +322,6 @@ function renderProjectsSection(filterFn, heading) {
 function generateHome() {
   const serviceCards = services.map(s => `
     <article class="card">
-      ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" loading="lazy" width="400" height="250">` : ''}
       <div class="card-body">
         <span class="card-badge">${esc(s.badge)}</span>
         <h3>${esc(s.shortName)}</h3>
@@ -380,7 +379,10 @@ function generateHome() {
           </div>
         </div>
         <div class="hero-img-box">
-          <img src="/images/1.jpg" alt="نموذج أرضية خشبية" width="600" height="450">
+          <figure>
+            <img src="/images/parquet-rustic-living-room-1.webp" srcset="/images/parquet-rustic-living-room-1-800.webp 800w, /images/parquet-rustic-living-room-1.webp 1600w" sizes="(max-width: 860px) 100vw, 520px" alt="نموذج أرضية خشبية فاتحة في صالة معيشة" width="332" height="240" fetchpriority="high" decoding="async">
+            <figcaption>نموذج أرضية خشبية لصالة معيشة</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -413,6 +415,15 @@ function generateHome() {
           <p>نوفر خدمات التوريد والتركيب للأرضيات وتكسيات الجدران ووزرات الأرضيات في مختلف مناطق الكويت.</p>
         </div>
         <div class="cards-grid">${serviceCards}</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" style="max-width:520px;">
+        <figure class="card" style="padding:12px;">
+          <img src="/images/parquet-bedroom-brown-1.webp" srcset="/images/parquet-bedroom-brown-1-800.webp 800w, /images/parquet-bedroom-brown-1.webp 1600w" sizes="(max-width: 768px) 100vw, 480px" alt="نموذج أرضية خشبية بنية دافئة في غرفة نوم" class="card-img" width="329" height="240" loading="lazy" decoding="async" style="border-radius:10px;">
+          <figcaption>نموذج أرضية خشبية لغرفة نوم</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -468,7 +479,7 @@ function generateHome() {
 function generateServices() {
   const hubCards = services.map(s => `
     <article class="card">
-      ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" loading="lazy">` : ''}
+      ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" width="${s.width || 800}" height="${s.height || 600}" loading="lazy" decoding="async">` : ''}
       <div class="card-body">
         <span class="card-badge">${esc(s.badge)}</span>
         <h3>${esc(s.shortName)}</h3>
@@ -550,7 +561,7 @@ function generateServices() {
         <div class="container">
           <div class="breadcrumbs"><a href="/">الرئيسية</a> / <a href="${toHref('/الخدمات/')}">خدماتنا</a> / <span>${esc(s.shortName)}</span></div>
           <div class="${s.image ? 'detail-layout' : ''}">
-            ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="detail-img" width="420" height="315">` : ''}
+            ${s.image ? `<figure class="figure-card"><img src="${s.image}" alt="${esc(s.imageAlt)}" class="detail-img" width="${s.width || 420}" height="${s.height || 315}" fetchpriority="high" decoding="async"><figcaption>${esc(s.imageAlt)}</figcaption></figure>` : ''}
             <div class="detail-content">
               <span class="card-badge">${esc(s.badge)}</span>
               <h1>${esc(s.h1)}</h1>
@@ -581,6 +592,15 @@ function generateServices() {
           <div class="cards-grid">${procHtml}</div>
         </div>
       </section>
+
+      ${Array.isArray(s.gallery) && s.gallery.length ? `<section class="section">
+        <div class="container">
+          <div class="section-header"><h2>نماذج تصميم ${esc(s.shortName)}</h2><p>صور نماذج تصميمية توضح درجات الألوان وخيارات التشطيب المتاحة.</p></div>
+          <div class="cards-grid">
+            ${s.gallery.map(g => `<figure class="card figure-card"><img src="${g.src}"${g.src.endsWith('.webp') ? ` srcset="${g.src.replace('.webp', '-800.webp')} 800w, ${g.src} 1600w" sizes="(max-width: 768px) 100vw, 400px"` : ''} alt="${esc(g.alt)}" class="card-img" width="${g.width}" height="${g.height}" loading="lazy" decoding="async"><figcaption>${esc(g.caption || g.alt)}</figcaption></figure>`).join('')}
+          </div>
+        </div>
+      </section>` : ''}
 
       ${renderProjectsSection(p => p.service === s.slug || p.service === s.shortName, `نماذج أعمال ${s.shortName}`)}
 
@@ -646,7 +666,6 @@ function generateAreas() {
     const recServices = services.filter(s => a.recommendedServices.includes(s.slug));
     const recHtml = recServices.map(s => `
       <article class="card">
-        ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" loading="lazy">` : ''}
         <div class="card-body">
           <span class="card-badge">${esc(a.governorate)}</span>
           <h3>${esc(s.shortName)}</h3>
@@ -854,17 +873,30 @@ function generateSupportingPages() {
   </main>
   ${buildFooter()}`, true, 'pricing');
 
+  const galleryIndexable = projects.length >= 5;
   const galHead = buildHead({
     title: 'معرض نماذج الأرضيات والديكور | أرضيات أنيقة',
     description: 'استعرض نماذج الأرضيات الخشبية وأرضيات SPC وديكور خلفية التلفزيون وألواح WPC للجدران والديكور ثلاثي الأبعاد المتوفرة لدينا في الكويت.',
     canonicalPath: '/معرض-الأعمال/',
+    indexable: galleryIndexable,
     schemaGraph: [orgSchema(), breadcrumbSchema([{ name: 'الرئيسية', path: '/' }, { name: 'معرض الأعمال', path: '/معرض-الأعمال/' }])]
   });
-  const galleryImgs = services.filter(s => s.image).map(s => ({
-    src: s.image,
-    alt: s.imageAlt,
-    label: s.shortName
-  }));
+  const gallerySamples = [
+    { src: '/images/parquet-dining-grey-1.webp', alt: 'نموذج باركيه رمادي لغرفة طعام بتشطيب عصري', caption: 'نموذج باركيه رمادي لغرفة الطعام', width: 339, height: 245, label: 'باركيه خشبي' },
+    { src: '/images/parquet-dark-grey-swatch-1.webp', alt: 'نموذج عينة باركيه رمادي داكن بتفاصيل خشبية', caption: 'عينة درجة رمادي داكن للأرضيات الخشبية', width: 339, height: 219, label: 'باركيه خشبي' },
+    { src: '/images/spc-living-room-beige-sofa-1.webp', alt: 'نموذج أرضية SPC فاتحة في صالة معيشة', caption: 'نموذج أرضية SPC بلون فاتح لصالة المعيشة', width: 332, height: 242, label: 'أرضيات SPC' }
+  ];
+  const galleryImgs = [
+    ...gallerySamples,
+    ...services.filter(s => s.image).map(s => ({
+      src: s.image,
+      alt: s.imageAlt,
+      caption: s.imageAlt,
+      width: s.width || 800,
+      height: s.height || 600,
+      label: s.shortName
+    }))
+  ];
   writeHtml('معرض-الأعمال/index.html', galHead + `<body>
   ${buildHeader('/معرض-الأعمال/')}
   <main>
@@ -878,12 +910,13 @@ function generateSupportingPages() {
     <section class="section">
       <div class="container">
         <div class="cards-grid">
-          ${galleryImgs.map(g => `<article class="card"><img src="${g.src}" alt="${esc(g.alt)}" class="card-img" loading="lazy"><div class="card-body"><span class="card-badge">${esc(g.label)}</span><p style="margin:0;">${esc(g.alt)}</p></div></article>`).join('')}
+          ${galleryImgs.map(g => `<figure class="card figure-card"><img src="${g.src}"${g.src.endsWith('.webp') ? ` srcset="${g.src.replace('.webp', '-800.webp')} 800w, ${g.src} 1600w" sizes="(max-width: 768px) 100vw, 400px"` : ''} alt="${esc(g.alt)}" class="card-img" width="${g.width}" height="${g.height}" loading="lazy" decoding="async"><figcaption><span class="card-badge">${esc(g.label)}</span> ${esc(g.caption)}</figcaption></figure>`).join('')}
         </div>
       </div>
     </section>
+    ${renderProjectsSection(() => true, 'المشاريع المنجزة في الكويت')}
   </main>
-  ${buildFooter()}`, true, 'gallery');
+  ${buildFooter()}`, galleryIndexable, 'gallery');
 
   const allFaqs = services.flatMap(s => s.faqs).slice(0, 12);
   const faqHead = buildHead({
@@ -1049,6 +1082,7 @@ ${internalRewrites}
 // 7. STRICT BUILD CHECKS
 function validateBuild() {
   const errors = [];
+  const imgReuseCounts = new Map();
 
   const bannedPhrases = [
     '100%',
@@ -1154,6 +1188,58 @@ function validateBuild() {
         JSON.parse(schemaMatch[1]);
       } catch (e) {
         errors.push(`[INVALID JSON-LD] Page ${urlPath}: ${e.message}`);
+      }
+    }
+
+    // Check every <img> has non-empty alt, width, height and total page image weight < 800 KB
+    const imgTags = [...html.matchAll(/<img\b([^>]*)>/gi)];
+    let pageImgBytes = 0;
+    const seenOnThisPage = new Set();
+    for (const m of imgTags) {
+      const attrs = m[1];
+      const srcM = attrs.match(/\bsrc="([^"]+)"/i);
+      const altM = attrs.match(/\balt="([^"]*)"/i);
+      const wM = attrs.match(/\bwidth="(\d+)"/i);
+      const hM = attrs.match(/\bheight="(\d+)"/i);
+      if (!altM || !altM[1].trim()) {
+        errors.push(`[IMG MISSING ALT] Page ${urlPath}: ${srcM ? srcM[1] : m[0]}`);
+      }
+      if (!wM || !hM) {
+        errors.push(`[IMG MISSING WIDTH/HEIGHT] Page ${urlPath}: ${srcM ? srcM[1] : m[0]}`);
+      }
+      if (srcM) {
+        const srcPath = srcM[1].replace(/^\//, '');
+        if (srcPath !== 'logo.png' && !seenOnThisPage.has(srcPath)) {
+          seenOnThisPage.add(srcPath);
+          imgReuseCounts.set(srcPath, (imgReuseCounts.get(srcPath) || 0) + 1);
+        }
+        const diskPath = path.join(ROOT, srcPath);
+        if (fs.existsSync(diskPath)) {
+          if (srcPath !== 'logo.png') {
+            pageImgBytes += fs.statSync(diskPath).size;
+          }
+        } else {
+          errors.push(`[IMG MISSING FILE] Page ${urlPath}: ${srcPath}`);
+        }
+      }
+    }
+    if (pageImgBytes > 800 * 1024) {
+      errors.push(`[PAGE IMG WEIGHT ${(pageImgBytes / 1024).toFixed(1)}KB > 800KB] Page ${urlPath}`);
+    }
+  }
+
+  for (const [imgSrc, count] of imgReuseCounts.entries()) {
+    if (count > 3) {
+      errors.push(`[IMG REUSED TOO MANY TIMES (${count} > 3)] ${imgSrc}`);
+    }
+  }
+
+  const imagesDir = path.join(ROOT, 'images');
+  if (fs.existsSync(imagesDir)) {
+    for (const fname of fs.readdirSync(imagesDir)) {
+      const fpath = path.join(imagesDir, fname);
+      if (fs.statSync(fpath).isFile() && fs.statSync(fpath).size > 300 * 1024) {
+        errors.push(`[IMAGE TOO LARGE > 300KB] images/${fname}`);
       }
     }
   }
