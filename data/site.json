@@ -1,6 +1,5 @@
 {
   "brandName": "أرضيات أنيقة",
-  "authorName": "",
   "domain": "https://woodflooringhouse.com",
   "phone": "55983357",
   "whatsapp": "96555983357",
@@ -16,19 +15,7 @@
     "laminateSold": false,
     "engineeredWoodSold": false,
     "mdfSkirtingSold": false,
-    "pvcSkirtingSold": false,
-    "ceilingDecorSold": false,
-    "concealedLightingSold": false,
-    "catalogCount": false
-  },
-  "catalogFacts": {
-    "service-1": { "designsCount": null },
-    "service-2": { "designsCount": null },
-    "service-3": { "designsCount": null },
-    "service-4": { "designsCount": null },
-    "service-5": { "designsCount": null },
-    "service-6": { "designsCount": null },
-    "service-7": { "designsCount": null }
+    "pvcSkirtingSold": false
   },
   "locale": "ar_KW",
   "lang": "ar-KW",

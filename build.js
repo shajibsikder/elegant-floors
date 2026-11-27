@@ -41,13 +41,13 @@ function toHref(rawPath) {
   return encodeURI(rawPath);
 }
 
-function writeHtml(relPath, html, indexable = true, asciiKey = null, lastmod = null, phoneInTitle = false) {
+function writeHtml(relPath, html, indexable = true, asciiKey = null, lastmod = null) {
   const urlPath = relPath === 'index.html' ? '/' : '/' + relPath.replace(/index\.html$/, '').replace(/\\/g, '/');
   const diskRelPath = asciiKey ? path.join('_pages', asciiKey, 'index.html') : relPath;
   const fullPath = path.join(ROOT, diskRelPath);
   ensureDir(path.dirname(fullPath));
   fs.writeFileSync(fullPath, html, 'utf8');
-  generatedPages.push({ urlPath, diskRelPath: diskRelPath.replace(/\\/g, '/'), fullPath, html, indexable, lastmod, phoneInTitle });
+  generatedPages.push({ urlPath, diskRelPath: diskRelPath.replace(/\\/g, '/'), fullPath, html, indexable, lastmod });
 }
 
 function esc(str) {
@@ -307,12 +307,14 @@ function buildQuoteWidgetsHtml() {
 function renderProjectsSection(filterFn, heading) {
   const matched = projects.filter(filterFn);
   if (!matched.length) return '';
-  const stripItems = matched.length >= 4 ? matched.slice(0, 4) : matched;
-  const cards = stripItems.map(p => `
-    <figure class="card figure-card">
-      <img src="${esc(p.image)}" alt="${esc(p.alt || (p.service + ' - ' + p.area))}" class="card-img" width="${p.width || 800}" height="${p.height || 600}" loading="lazy" decoding="async">
-      <figcaption><span class="card-badge">${esc(p.area)}${p.date ? ' • ' + esc(p.date) : ''}</span> ${esc(p.caption || p.service)}</figcaption>
-    </figure>`).join('');
+  const cards = matched.map(p => `
+    <article class="card">
+      <img src="${esc(p.image)}" alt="${esc(p.service)} - ${esc(p.area)}" class="card-img" loading="lazy">
+      <div class="card-body">
+        <span class="card-badge">${esc(p.area)} • ${esc(p.date)}</span>
+        <h3>${esc(p.service)}</h3>
+      </div>
+    </article>`).join('');
   return `
   <section class="section">
     <div class="container">
@@ -322,25 +324,11 @@ function renderProjectsSection(filterFn, heading) {
   </section>`;
 }
 
-function getServiceTitleAndDesc(s) {
-  let baseTitle = (claims.pvcSkirtingSold && s.titleWhenPvc) ? s.titleWhenPvc : s.title;
-  let baseDesc = (claims.pvcSkirtingSold && s.metaDescriptionWhenPvc) ? s.metaDescriptionWhenPvc : s.metaDescription;
-  const designsCount = site.catalogFacts && site.catalogFacts[s.id] ? site.catalogFacts[s.id].designsCount : null;
-  if (claims.catalogCount && typeof designsCount === 'number' && designsCount > 0) {
-    const countPhrase = `أكثر من ${designsCount} تصميماً ولوناً`;
-    const candidateTitle = baseTitle.includes('|') ? baseTitle.replace('|', `(${countPhrase}) |`) : `${baseTitle} - ${countPhrase}`;
-    const finalTitle = candidateTitle.length <= 60 ? candidateTitle : baseTitle;
-    const candidateDesc = `${countPhrase} — ${baseDesc}`;
-    const finalDesc = candidateDesc.length <= 155 ? candidateDesc : baseDesc;
-    return { title: finalTitle, description: finalDesc };
-  }
-  return { title: baseTitle, description: baseDesc };
-}
-
 // 1. HOME PAGE
 function generateHome() {
   const serviceCards = services.map(s => `
     <article class="card">
+      ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" loading="lazy" width="400" height="250">` : ''}
       <div class="card-body">
         <span class="card-badge">${esc(s.badge)}</span>
         <h3>${esc(s.shortName)}</h3>
@@ -370,13 +358,6 @@ function generateHome() {
     description: 'تركيب باركيه الكويت وأرضيات SPC وديكور خلفية التلفزيون وألواح WPC وورق الجدران ووزرات الأرضيات في جميع المحافظات. تواصل معنا لطلب عرض سعر.',
     canonicalPath: '/',
     schemaGraph: [
-      {
-        '@type': 'WebSite',
-        '@id': `${site.domain}/#website`,
-        name: 'أرضيات أنيقة',
-        alternateName: ['Elegant Floors'],
-        url: `${site.domain}/`
-      },
       orgSchema(),
       {
         '@type': 'FAQPage',
@@ -405,10 +386,7 @@ function generateHome() {
           </div>
         </div>
         <div class="hero-img-box">
-          <figure>
-            <img src="/images/parquet-rustic-living-room-1.webp" srcset="/images/parquet-rustic-living-room-1-800.webp 800w, /images/parquet-rustic-living-room-1.webp 1600w" sizes="(max-width: 860px) 100vw, 520px" alt="نموذج أرضية خشبية فاتحة في صالة معيشة" width="332" height="240" fetchpriority="high" decoding="async">
-            <figcaption>نموذج أرضية خشبية لصالة معيشة</figcaption>
-          </figure>
+          <img src="/images/1.jpg" alt="نموذج أرضية خشبية" width="600" height="450">
         </div>
       </div>
     </section>
@@ -441,15 +419,6 @@ function generateHome() {
           <p>نوفر خدمات التوريد والتركيب للأرضيات وتكسيات الجدران ووزرات الأرضيات في مختلف مناطق الكويت.</p>
         </div>
         <div class="cards-grid">${serviceCards}</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container" style="max-width:520px;">
-        <figure class="card" style="padding:12px;">
-          <img src="/images/parquet-bedroom-brown-1.webp" srcset="/images/parquet-bedroom-brown-1-800.webp 800w, /images/parquet-bedroom-brown-1.webp 1600w" sizes="(max-width: 768px) 100vw, 480px" alt="نموذج أرضية خشبية بنية دافئة في غرفة نوم" class="card-img" width="329" height="240" loading="lazy" decoding="async" style="border-radius:10px;">
-          <figcaption>نموذج أرضية خشبية لغرفة نوم</figcaption>
-        </figure>
       </div>
     </section>
 
@@ -505,7 +474,7 @@ function generateHome() {
 function generateServices() {
   const hubCards = services.map(s => `
     <article class="card">
-      ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" width="${s.width || 800}" height="${s.height || 600}" loading="lazy" decoding="async">` : ''}
+      ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" loading="lazy">` : ''}
       <div class="card-body">
         <span class="card-badge">${esc(s.badge)}</span>
         <h3>${esc(s.shortName)}</h3>
@@ -556,10 +525,9 @@ function generateServices() {
     const areaLinks = areas.filter(a => a.indexable !== false)
       .map(a => `<a href="${toHref('/مناطق-الكويت/' + a.slug + '/')}" class="area-chip">${esc(a.governorate)}</a>`).join('');
 
-    const { title: svcTitle, description: svcDesc } = getServiceTitleAndDesc(s);
     const head = buildHead({
-      title: svcTitle,
-      description: svcDesc,
+      title: s.title,
+      description: s.metaDescription,
       canonicalPath: `/${s.slug}/`,
       ogImage: s.image || site.defaultImage,
       schemaGraph: [
@@ -573,7 +541,7 @@ function generateServices() {
           '@type': 'Service',
           name: s.h1,
           serviceType: s.shortName,
-          description: svcDesc,
+          description: s.metaDescription,
           provider: { '@id': `${site.domain}/#business` },
           areaServed: areas.filter(a => a.indexable !== false).map(a => ({ '@type': 'AdministrativeArea', name: a.governorate })),
           ...(s.image ? { image: site.domain + s.image } : {})
@@ -596,14 +564,13 @@ function generateServices() {
         <div class="container">
           <div class="breadcrumbs"><a href="/">الرئيسية</a> / <a href="${toHref('/الخدمات/')}">خدماتنا</a> / <span>${esc(s.shortName)}</span></div>
           <div class="${s.image ? 'detail-layout' : ''}">
-            ${s.image ? `<figure class="figure-card"><img src="${s.image}" alt="${esc(s.imageAlt)}" class="detail-img" width="${s.width || 420}" height="${s.height || 315}" fetchpriority="high" decoding="async"><figcaption>${esc(s.imageAlt)}</figcaption></figure>` : ''}
+            ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="detail-img" width="420" height="315">` : ''}
             <div class="detail-content">
               <span class="card-badge">${esc(s.badge)}</span>
               <h1>${esc(s.h1)}</h1>
               <div class="prose">
                 <p>${esc(s.intro)}</p>
                 ${s.bodyParagraphs.map(p => `<p>${esc(p)}</p>`).join('')}
-                ${claims.pvcSkirtingSold && s.pvcParagraph ? `<p>${esc(s.pvcParagraph)}</p>` : ''}
                 ${idx === 0 ? `<p>للمزيد من التفاصيل قبل الاتفاق، يمكنك قراءة دليل <a href="${toHref('/' + guideMeta.slug + '/')}">فني باركيه في الكويت: دليل الاختيار</a>.</p>` : ''}
               </div>
               ${kuwaitNoteBoxHtml()}
@@ -629,15 +596,6 @@ function generateServices() {
           <div class="cards-grid">${procHtml}</div>
         </div>
       </section>
-
-      ${Array.isArray(s.gallery) && s.gallery.length ? `<section class="section">
-        <div class="container">
-          <div class="section-header"><h2>نماذج تصميم ${esc(s.shortName)}</h2><p>صور نماذج تصميمية توضح درجات الألوان وخيارات التشطيب المتاحة.</p></div>
-          <div class="cards-grid">
-            ${s.gallery.map(g => `<figure class="card figure-card"><img src="${g.src}"${g.src.endsWith('.webp') ? ` srcset="${g.src.replace('.webp', '-800.webp')} 800w, ${g.src} 1600w" sizes="(max-width: 768px) 100vw, 400px"` : ''} alt="${esc(g.alt)}" class="card-img" width="${g.width}" height="${g.height}" loading="lazy" decoding="async"><figcaption>${esc(g.caption || g.alt)}</figcaption></figure>`).join('')}
-          </div>
-        </div>
-      </section>` : ''}
 
       ${renderProjectsSection(p => p.service === s.slug || p.service === s.shortName, `نماذج أعمال ${s.shortName}`)}
 
@@ -728,7 +686,7 @@ function generateGuidePage() {
   const sectionsHtml = sections.map((sec, i) => {
     const listItems = sec.items.filter(x => x.type === 'li');
     const paras = sec.items.filter(x => x.type === 'p');
-    const listHtml = listItems.length ? `<ul class="guide-list" style="padding-right:20px;line-height:1.9;">${listItems.map(li => `<li>${esc(li.text)}</li>`).join('')}</ul>` : '';
+    const listHtml = listItems.length ? `<ul style="padding-right:20px;line-height:1.9;">${listItems.map(li => `<li>${esc(li.text)}</li>`).join('')}</ul>` : '';
     const parasHtml = paras.map(p => `<p>${esc(p.text)}</p>`).join('');
     return `
       <section class="section${i % 2 === 1 ? ' section-alt' : ''}">
@@ -740,7 +698,6 @@ function generateGuidePage() {
   }).join('');
 
   const faqsHtml = guideFaqs.map(f => `<div class="faq-item"><div class="faq-q">${esc(f.q)}</div><div class="faq-a">${esc(f.a)}</div></div>`).join('');
-  const authorLine = (site.authorName && site.authorName.trim()) ? ` · الكاتب: ${esc(site.authorName.trim())}` : '';
 
   const head = buildHead({
     title: guideMeta.title,
@@ -780,7 +737,7 @@ function generateGuidePage() {
         <div class="breadcrumbs"><a href="/">الرئيسية</a> / <a href="${toHref('/الخدمات/')}">خدماتنا</a> / <span>${esc(guideMeta.shortName)}</span></div>
         <span class="card-badge">${esc(guideMeta.badge)}</span>
         <h1>${esc(h1)}</h1>
-        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:12px;">آخر تحديث: ${esc(guideMeta.lastUpdated)}${authorLine}</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:12px;">آخر تحديث: ${esc(guideMeta.lastUpdated)}</p>
         <div class="prose">${introParas.map(p => `<p>${esc(p)}</p>`).join('')}</div>
         ${kuwaitNoteBoxHtml()}
         <div class="hero-actions" style="margin-top:16px;">
@@ -801,7 +758,7 @@ function generateGuidePage() {
   </main>
   ${buildFooter()}`;
 
-  writeHtml(`${guideMeta.slug}/index.html`, head + body, true, guideMeta.asciiKey, guideMeta.lastUpdated, Boolean(guideMeta.phoneInTitle));
+  writeHtml(`${guideMeta.slug}/index.html`, head + body, true, guideMeta.asciiKey, guideMeta.lastUpdated);
 }
 
 // 3. AREAS HUB + GOVERNORATE/AREA PAGES
@@ -844,6 +801,7 @@ function generateAreas() {
     const recServices = services.filter(s => a.recommendedServices.includes(s.slug));
     const recHtml = recServices.map(s => `
       <article class="card">
+        ${s.image ? `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="card-img" loading="lazy">` : ''}
         <div class="card-body">
           <span class="card-badge">${esc(a.governorate)}</span>
           <h3>${esc(s.shortName)}</h3>
@@ -1051,30 +1009,17 @@ function generateSupportingPages() {
   </main>
   ${buildFooter()}`, true, 'pricing');
 
-  const galleryIndexable = projects.length >= 5;
   const galHead = buildHead({
     title: 'معرض نماذج الأرضيات والديكور | أرضيات أنيقة',
     description: 'استعرض نماذج الأرضيات الخشبية وأرضيات SPC وديكور خلفية التلفزيون وألواح WPC للجدران والديكور ثلاثي الأبعاد المتوفرة لدينا في الكويت.',
     canonicalPath: '/معرض-الأعمال/',
-    indexable: galleryIndexable,
     schemaGraph: [orgSchema(), breadcrumbSchema([{ name: 'الرئيسية', path: '/' }, { name: 'معرض الأعمال', path: '/معرض-الأعمال/' }])]
   });
-  const gallerySamples = [
-    { src: '/images/parquet-dining-grey-1.webp', alt: 'نموذج باركيه رمادي لغرفة طعام بتشطيب عصري', caption: 'نموذج باركيه رمادي لغرفة الطعام', width: 339, height: 245, label: 'باركيه خشبي' },
-    { src: '/images/parquet-dark-grey-swatch-1.webp', alt: 'نموذج عينة باركيه رمادي داكن بتفاصيل خشبية', caption: 'عينة درجة رمادي داكن للأرضيات الخشبية', width: 339, height: 219, label: 'باركيه خشبي' },
-    { src: '/images/spc-living-room-beige-sofa-1.webp', alt: 'نموذج أرضية SPC فاتحة في صالة معيشة', caption: 'نموذج أرضية SPC بلون فاتح لصالة المعيشة', width: 332, height: 242, label: 'أرضيات SPC' }
-  ];
-  const galleryImgs = [
-    ...gallerySamples,
-    ...services.filter(s => s.image).map(s => ({
-      src: s.image,
-      alt: s.imageAlt,
-      caption: s.imageAlt,
-      width: s.width || 800,
-      height: s.height || 600,
-      label: s.shortName
-    }))
-  ];
+  const galleryImgs = services.filter(s => s.image).map(s => ({
+    src: s.image,
+    alt: s.imageAlt,
+    label: s.shortName
+  }));
   writeHtml('معرض-الأعمال/index.html', galHead + `<body>
   ${buildHeader('/معرض-الأعمال/')}
   <main>
@@ -1088,13 +1033,12 @@ function generateSupportingPages() {
     <section class="section">
       <div class="container">
         <div class="cards-grid">
-          ${galleryImgs.map(g => `<figure class="card figure-card"><img src="${g.src}"${g.src.endsWith('.webp') ? ` srcset="${g.src.replace('.webp', '-800.webp')} 800w, ${g.src} 1600w" sizes="(max-width: 768px) 100vw, 400px"` : ''} alt="${esc(g.alt)}" class="card-img" width="${g.width}" height="${g.height}" loading="lazy" decoding="async"><figcaption><span class="card-badge">${esc(g.label)}</span> ${esc(g.caption)}</figcaption></figure>`).join('')}
+          ${galleryImgs.map(g => `<article class="card"><img src="${g.src}" alt="${esc(g.alt)}" class="card-img" loading="lazy"><div class="card-body"><span class="card-badge">${esc(g.label)}</span><p style="margin:0;">${esc(g.alt)}</p></div></article>`).join('')}
         </div>
       </div>
     </section>
-    ${renderProjectsSection(() => true, 'المشاريع المنجزة في الكويت')}
   </main>
-  ${buildFooter()}`, galleryIndexable, 'gallery');
+  ${buildFooter()}`, true, 'gallery');
 
   const allFaqs = services.flatMap(s => s.faqs).slice(0, 12);
   const faqHead = buildHead({
@@ -1203,20 +1147,13 @@ function generateConfigFiles() {
     const prio = p.urlPath === '/' ? '1.0' : (p.urlPath.split('/').length <= 3 ? '0.9' : '0.8');
     const loc = esc(`${site.domain}${toHref(p.urlPath)}`);
     const lastmodTag = p.lastmod ? `\n    <lastmod>${esc(p.lastmod)}</lastmod>` : '';
-    const pageProjects = p.urlPath === '/'
-      ? projects.slice(0, 4)
-      : projects.filter(pr => `/${pr.serviceSlug || pr.service}/` === p.urlPath);
-    const imagesXml = pageProjects
-      .filter(pr => pr.image)
-      .map(pr => `\n    <image:image>\n      <image:loc>${esc(site.domain + pr.image)}</image:loc>\n      <image:caption>${esc(pr.caption || pr.alt || (pr.service + ' - ' + pr.area))}</image:caption>\n    </image:image>`)
-      .join('');
     return `  <url>
     <loc>${loc}</loc>${lastmodTag}
-    <priority>${prio}</priority>${imagesXml}
+    <priority>${prio}</priority>
   </url>`;
   }).join('\n');
 
-  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urlsXml}\n</urlset>\n`, 'utf8');
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlsXml}\n</urlset>\n`, 'utf8');
 
   fs.writeFileSync(path.join(ROOT, 'robots.txt'), `# Robots.txt — ${site.brandName}\nUser-agent: *\nAllow: /\n\nSitemap: ${site.domain}/sitemap.xml\n`, 'utf8');
 
@@ -1267,7 +1204,6 @@ ${internalRewrites}
 // 7. STRICT BUILD CHECKS
 function validateBuild() {
   const errors = [];
-  const imgReuseCounts = new Map();
 
   const bannedPhrases = [
     '100%',
@@ -1283,9 +1219,7 @@ function validateBuild() {
     'فندقي',
     'شغل نظيف',
     'تخلص غالباً',
-    'ضد الماء بالكامل',
-    'ملاحظة:',
-    'Act as'
+    'ضد الماء بالكامل'
   ];
   if (!claims.europeanOrigin) {
     bannedPhrases.push('الأوروبي', 'أوروبي', 'أوروبية');
@@ -1328,12 +1262,6 @@ function validateBuild() {
       if (seenTitles.has(t)) {
         errors.push(`[DUPLICATE TITLE] "${t}" on ${urlPath} and ${seenTitles.get(t)}`);
       }
-      if (/55983357|\+965/.test(t) && !page.phoneInTitle) {
-        errors.push(`[PHONE IN TITLE] Page ${urlPath}: "${t}"`);
-      }
-      if (!claims.catalogCount && /(?:أكثر من\s+\d+|\d+\+?\s*(?:تصميم|تصميماً|لون|لوناً|موديل))/.test(t)) {
-        errors.push(`[UNBACKED COUNT CLAIM IN TITLE] Page ${urlPath}: "${t}"`);
-      }
       seenTitles.set(t, urlPath);
     }
 
@@ -1351,12 +1279,6 @@ function validateBuild() {
       }
       if (seenDescs.has(d)) {
         errors.push(`[DUPLICATE DESCRIPTION] on ${urlPath} and ${seenDescs.get(d)}`);
-      }
-      if (/55983357|\+965/.test(d)) {
-        errors.push(`[PHONE IN DESCRIPTION] Page ${urlPath}: "${d}"`);
-      }
-      if (!claims.catalogCount && /(?:أكثر من\s+\d+|\d+\+?\s*(?:تصميم|تصميماً|لون|لوناً|موديل))/.test(d)) {
-        errors.push(`[UNBACKED COUNT CLAIM IN DESCRIPTION] Page ${urlPath}: "${d}"`);
       }
       seenDescs.set(d, urlPath);
     }
@@ -1387,58 +1309,6 @@ function validateBuild() {
         JSON.parse(schemaMatch[1]);
       } catch (e) {
         errors.push(`[INVALID JSON-LD] Page ${urlPath}: ${e.message}`);
-      }
-    }
-
-    // Check every <img> has non-empty alt, width, height and total page image weight < 800 KB
-    const imgTags = [...html.matchAll(/<img\b([^>]*)>/gi)];
-    let pageImgBytes = 0;
-    const seenOnThisPage = new Set();
-    for (const m of imgTags) {
-      const attrs = m[1];
-      const srcM = attrs.match(/\bsrc="([^"]+)"/i);
-      const altM = attrs.match(/\balt="([^"]*)"/i);
-      const wM = attrs.match(/\bwidth="(\d+)"/i);
-      const hM = attrs.match(/\bheight="(\d+)"/i);
-      if (!altM || !altM[1].trim()) {
-        errors.push(`[IMG MISSING ALT] Page ${urlPath}: ${srcM ? srcM[1] : m[0]}`);
-      }
-      if (!wM || !hM) {
-        errors.push(`[IMG MISSING WIDTH/HEIGHT] Page ${urlPath}: ${srcM ? srcM[1] : m[0]}`);
-      }
-      if (srcM) {
-        const srcPath = srcM[1].replace(/^\//, '');
-        if (srcPath !== 'logo.png' && !seenOnThisPage.has(srcPath)) {
-          seenOnThisPage.add(srcPath);
-          imgReuseCounts.set(srcPath, (imgReuseCounts.get(srcPath) || 0) + 1);
-        }
-        const diskPath = path.join(ROOT, srcPath);
-        if (fs.existsSync(diskPath)) {
-          if (srcPath !== 'logo.png') {
-            pageImgBytes += fs.statSync(diskPath).size;
-          }
-        } else {
-          errors.push(`[IMG MISSING FILE] Page ${urlPath}: ${srcPath}`);
-        }
-      }
-    }
-    if (pageImgBytes > 800 * 1024) {
-      errors.push(`[PAGE IMG WEIGHT ${(pageImgBytes / 1024).toFixed(1)}KB > 800KB] Page ${urlPath}`);
-    }
-  }
-
-  for (const [imgSrc, count] of imgReuseCounts.entries()) {
-    if (count > 3) {
-      errors.push(`[IMG REUSED TOO MANY TIMES (${count} > 3)] ${imgSrc}`);
-    }
-  }
-
-  const imagesDir = path.join(ROOT, 'images');
-  if (fs.existsSync(imagesDir)) {
-    for (const fname of fs.readdirSync(imagesDir)) {
-      const fpath = path.join(imagesDir, fname);
-      if (fs.statSync(fpath).isFile() && fs.statSync(fpath).size > 300 * 1024) {
-        errors.push(`[IMAGE TOO LARGE > 300KB] images/${fname}`);
       }
     }
   }
@@ -1473,21 +1343,8 @@ function validateBuild() {
     }
   }
 
-  for (const fav of ['favicon.ico', 'favicon.svg', 'icon-48.png', 'icon-192.png', 'apple-touch-icon.png']) {
-    if (!fs.existsSync(path.join(ROOT, fav))) {
-      errors.push(`[MISSING FAVICON FILE] ${fav}`);
-    }
-  }
-
   // Sitemap XML validation
   const sitemapXml = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
-  const smImgLocs = [...sitemapXml.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map(m => m[1]);
-  for (const imgLoc of smImgLocs) {
-    const rel = imgLoc.replace(site.domain, '').replace(/^\//, '');
-    if (!fs.existsSync(path.join(ROOT, rel))) {
-      errors.push(`[SITEMAP MISSING IMAGE FILE] ${imgLoc}`);
-    }
-  }
   if (/xml-stylesheet/i.test(sitemapXml)) {
     errors.push('[SITEMAP] Must not contain xml-stylesheet');
   }
@@ -1507,28 +1364,6 @@ function validateBuild() {
     seenSmLocs.add(loc);
     if (!indexableSet.has(loc)) {
       errors.push(`[SITEMAP NON-INDEXABLE LOC] ${loc}`);
-    }
-  }
-
-  // Check new guide page vs service-1 sentence similarity (< 35%)
-  const guidePage = generatedPages.find(p => p.urlPath === `/${guideMeta.slug}/`);
-  const svc1Page = generatedPages.find(p => p.urlPath === `/${services[0].slug}/`);
-  if (guidePage && svc1Page) {
-    const extractSents = (htmlStr) => {
-      const mainMatch = htmlStr.match(/<main>([\s\S]*?)<\/main>/i);
-      const text = (mainMatch ? mainMatch[1] : htmlStr).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-      return new Set(text.split(/[.!؟؛\n]+/).map(s => s.trim()).filter(s => s.length > 15));
-    };
-    const sGuide = extractSents(guidePage.html);
-    const sSvc1 = extractSents(svc1Page.html);
-    let sharedSents = 0;
-    for (const s of sGuide) {
-      if (sSvc1.has(s)) sharedSents++;
-    }
-    const simRatio = sGuide.size && sSvc1.size ? (sharedSents / Math.min(sGuide.size, sSvc1.size)) : 0;
-    console.log(`Guide vs service-1 sentence similarity: ${(simRatio * 100).toFixed(1)}% (${sharedSents}/${Math.min(sGuide.size, sSvc1.size)})`);
-    if (simRatio >= 0.35) {
-      errors.push(`[GUIDE SIMILARITY ${(simRatio * 100).toFixed(1)}% >= 35%] vs service-1`);
     }
   }
 

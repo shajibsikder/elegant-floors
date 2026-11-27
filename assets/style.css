@@ -47,9 +47,6 @@ h1, h2, h3, h4 {
 @media (min-width: 769px) { body { padding-bottom: 0; } }
 
 img { max-width: 100%; height: auto; display: block; }
-figure { margin: 0; }
-figcaption { font-size: 0.86rem; color: var(--text-muted); margin-top: 8px; text-align: center; }
-.hero figure figcaption { color: #d6d3d1; padding: 8px 10px; background: rgba(28, 25, 23, 0.75); margin-top: 0; }
 a { color: inherit; }
 [dir="ltr"] { direction: ltr; unicode-bidi: isolate; display: inline-block; }
 
