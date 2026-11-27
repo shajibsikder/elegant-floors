@@ -278,6 +278,34 @@ a { color: inherit; }
   opacity: 1;
   z-index: 1;
 }
+.samples-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 769px) {
+  .samples-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.sample-card {
+  margin: 0;
+  overflow: hidden;
+}
+.sample-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.sample-card figcaption {
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: center;
+  margin-top: 0;
+}
 
 /* Trust Strip */
 .trust-strip {
