@@ -385,8 +385,8 @@ function generateHome() {
             <a href="#quote-widgets" class="btn-outline">احسب المساحة</a>
           </div>
         </div>
-        <div class="hero-img-box">
-          <img src="/images/1.jpg" alt="نموذج أرضية خشبية" width="600" height="450">
+        <div class="hero-img-box hero-slider">
+          ${services.filter(s => s.image).map((s, i) => `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="hero-slide${i === 0 ? ' is-active' : ''}" width="600" height="450"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`).join('\n          ')}
         </div>
       </div>
     </section>
