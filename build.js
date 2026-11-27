@@ -101,7 +101,7 @@ function buildHead({ title, description, canonicalPath, ogImage, schemaGraph, in
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css?v=4.4">${ga4Snippet}
+  <link rel="stylesheet" href="/assets/style.css?v=4.6">${ga4Snippet}
   <script type="application/ld+json">${schemaJson}</script>
 </head>`;
 }
@@ -201,7 +201,7 @@ function buildFooter() {
     <a href="tel:+965${site.phone}" class="sticky-btn-call">اتصل الآن</a>
     <a href="https://wa.me/${site.whatsapp}?text=${encodeURIComponent('السلام عليكم، أرغب بالاستفسار عن خدمات الباركيه والديكور في الكويت.')}" target="_blank" rel="noopener" class="sticky-btn-wa">واتساب فوري</a>
   </div>
-  <script src="/assets/app.js?v=4.4" defer></script>
+  <script src="/assets/app.js?v=4.6" defer></script>
 <!--
 ====================================================
 Project Development Credit
@@ -386,7 +386,9 @@ function generateHome() {
           </div>
         </div>
         <div class="hero-img-box hero-slider">
-          ${services.filter(s => s.image).map((s, i) => `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="hero-slide${i === 0 ? ' is-active' : ''}" width="600" height="450"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`).join('\n          ')}
+          <div class="hero-slider-track">
+            ${services.filter(s => s.image).map((s, i) => `<img src="${s.image}" alt="${esc(s.imageAlt)}" class="hero-slide" width="600" height="450"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`).join('\n            ')}
+          </div>
         </div>
       </div>
     </section>

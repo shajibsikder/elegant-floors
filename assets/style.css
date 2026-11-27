@@ -265,18 +265,22 @@ a { color: inherit; }
 }
 .hero-img-box.hero-slider {
   aspect-ratio: 4/3;
+  overflow: hidden;
 }
-.hero-slide {
-  position: absolute;
-  inset: 0;
+.hero-slider-track {
+  display: flex;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transition: opacity 0.45s ease-in-out;
+  direction: ltr;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
 }
-.hero-slide.is-active {
-  opacity: 1;
-  z-index: 1;
+.hero-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .samples-grid-3 {
   display: grid;
