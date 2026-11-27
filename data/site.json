@@ -17,7 +17,17 @@
     "mdfSkirtingSold": false,
     "pvcSkirtingSold": false,
     "ceilingDecorSold": false,
-    "concealedLightingSold": false
+    "concealedLightingSold": false,
+    "catalogCount": false
+  },
+  "catalogFacts": {
+    "service-1": { "designsCount": null },
+    "service-2": { "designsCount": null },
+    "service-3": { "designsCount": null },
+    "service-4": { "designsCount": null },
+    "service-5": { "designsCount": null },
+    "service-6": { "designsCount": null },
+    "service-7": { "designsCount": null }
   },
   "locale": "ar_KW",
   "lang": "ar-KW",

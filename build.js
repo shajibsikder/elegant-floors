@@ -92,7 +92,11 @@ function buildHead({ title, description, canonicalPath, ogImage, schemaGraph, in
   <meta name="twitter:description" content="${esc(description)}">
   <meta name="twitter:image" content="${imgUrl}">
   <meta name="theme-color" content="${site.themeColor}">
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
@@ -301,14 +305,12 @@ function buildQuoteWidgetsHtml() {
 function renderProjectsSection(filterFn, heading) {
   const matched = projects.filter(filterFn);
   if (!matched.length) return '';
-  const cards = matched.map(p => `
-    <article class="card">
-      <img src="${esc(p.image)}" alt="${esc(p.service)} - ${esc(p.area)}" class="card-img" loading="lazy">
-      <div class="card-body">
-        <span class="card-badge">${esc(p.area)} • ${esc(p.date)}</span>
-        <h3>${esc(p.service)}</h3>
-      </div>
-    </article>`).join('');
+  const stripItems = matched.length >= 4 ? matched.slice(0, 4) : matched;
+  const cards = stripItems.map(p => `
+    <figure class="card figure-card">
+      <img src="${esc(p.image)}" alt="${esc(p.alt || (p.service + ' - ' + p.area))}" class="card-img" width="${p.width || 800}" height="${p.height || 600}" loading="lazy" decoding="async">
+      <figcaption><span class="card-badge">${esc(p.area)}${p.date ? ' • ' + esc(p.date) : ''}</span> ${esc(p.caption || p.service)}</figcaption>
+    </figure>`).join('');
   return `
   <section class="section">
     <div class="container">
@@ -316,6 +318,19 @@ function renderProjectsSection(filterFn, heading) {
       <div class="cards-grid">${cards}</div>
     </div>
   </section>`;
+}
+
+function getServiceTitleAndDesc(s) {
+  const designsCount = site.catalogFacts && site.catalogFacts[s.id] ? site.catalogFacts[s.id].designsCount : null;
+  if (claims.catalogCount && typeof designsCount === 'number' && designsCount > 0) {
+    const countPhrase = `أكثر من ${designsCount} تصميماً ولوناً`;
+    const candidateTitle = s.title.includes('|') ? s.title.replace('|', `(${countPhrase}) |`) : `${s.title} - ${countPhrase}`;
+    const finalTitle = candidateTitle.length <= 60 ? candidateTitle : s.title;
+    const candidateDesc = `${countPhrase} — ${s.metaDescription}`;
+    const finalDesc = candidateDesc.length <= 155 ? candidateDesc : s.metaDescription;
+    return { title: finalTitle, description: finalDesc };
+  }
+  return { title: s.title, description: s.metaDescription };
 }
 
 // 1. HOME PAGE
@@ -351,6 +366,13 @@ function generateHome() {
     description: 'تركيب باركيه الكويت وأرضيات SPC وديكور خلفية التلفزيون وألواح WPC وورق الجدران ووزرات الأرضيات في جميع المحافظات. تواصل معنا لطلب عرض سعر.',
     canonicalPath: '/',
     schemaGraph: [
+      {
+        '@type': 'WebSite',
+        '@id': `${site.domain}/#website`,
+        name: 'أرضيات أنيقة',
+        alternateName: ['Elegant Floors'],
+        url: `${site.domain}/`
+      },
       orgSchema(),
       {
         '@type': 'FAQPage',
@@ -522,9 +544,10 @@ function generateServices() {
     const areaLinks = areas.filter(a => a.indexable !== false)
       .map(a => `<a href="${toHref('/مناطق-الكويت/' + a.slug + '/')}" class="area-chip">${esc(a.governorate)}</a>`).join('');
 
+    const { title: svcTitle, description: svcDesc } = getServiceTitleAndDesc(s);
     const head = buildHead({
-      title: s.title,
-      description: s.metaDescription,
+      title: svcTitle,
+      description: svcDesc,
       canonicalPath: `/${s.slug}/`,
       ogImage: s.image || site.defaultImage,
       schemaGraph: [
@@ -1025,13 +1048,20 @@ function generateConfigFiles() {
     const prio = p.urlPath === '/' ? '1.0' : (p.urlPath.split('/').length <= 3 ? '0.9' : '0.8');
     const loc = esc(`${site.domain}${toHref(p.urlPath)}`);
     const lastmodTag = p.lastmod ? `\n    <lastmod>${esc(p.lastmod)}</lastmod>` : '';
+    const pageProjects = p.urlPath === '/'
+      ? projects.slice(0, 4)
+      : projects.filter(pr => `/${pr.serviceSlug || pr.service}/` === p.urlPath);
+    const imagesXml = pageProjects
+      .filter(pr => pr.image)
+      .map(pr => `\n    <image:image>\n      <image:loc>${esc(site.domain + pr.image)}</image:loc>\n      <image:caption>${esc(pr.caption || pr.alt || (pr.service + ' - ' + pr.area))}</image:caption>\n    </image:image>`)
+      .join('');
     return `  <url>
     <loc>${loc}</loc>${lastmodTag}
-    <priority>${prio}</priority>
+    <priority>${prio}</priority>${imagesXml}
   </url>`;
   }).join('\n');
 
-  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlsXml}\n</urlset>\n`, 'utf8');
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urlsXml}\n</urlset>\n`, 'utf8');
 
   fs.writeFileSync(path.join(ROOT, 'robots.txt'), `# Robots.txt — ${site.brandName}\nUser-agent: *\nAllow: /\n\nSitemap: ${site.domain}/sitemap.xml\n`, 'utf8');
 
@@ -1141,6 +1171,12 @@ function validateBuild() {
       if (seenTitles.has(t)) {
         errors.push(`[DUPLICATE TITLE] "${t}" on ${urlPath} and ${seenTitles.get(t)}`);
       }
+      if (/55983357|\+965/.test(t)) {
+        errors.push(`[PHONE IN TITLE] Page ${urlPath}: "${t}"`);
+      }
+      if (!claims.catalogCount && /(?:أكثر من\s+\d+|\d+\+?\s*(?:تصميم|تصميماً|لون|لوناً|موديل))/.test(t)) {
+        errors.push(`[UNBACKED COUNT CLAIM IN TITLE] Page ${urlPath}: "${t}"`);
+      }
       seenTitles.set(t, urlPath);
     }
 
@@ -1158,6 +1194,12 @@ function validateBuild() {
       }
       if (seenDescs.has(d)) {
         errors.push(`[DUPLICATE DESCRIPTION] on ${urlPath} and ${seenDescs.get(d)}`);
+      }
+      if (/55983357|\+965/.test(d)) {
+        errors.push(`[PHONE IN DESCRIPTION] Page ${urlPath}: "${d}"`);
+      }
+      if (!claims.catalogCount && /(?:أكثر من\s+\d+|\d+\+?\s*(?:تصميم|تصميماً|لون|لوناً|موديل))/.test(d)) {
+        errors.push(`[UNBACKED COUNT CLAIM IN DESCRIPTION] Page ${urlPath}: "${d}"`);
       }
       seenDescs.set(d, urlPath);
     }
@@ -1274,8 +1316,21 @@ function validateBuild() {
     }
   }
 
+  for (const fav of ['favicon.ico', 'favicon.svg', 'icon-48.png', 'icon-192.png', 'apple-touch-icon.png']) {
+    if (!fs.existsSync(path.join(ROOT, fav))) {
+      errors.push(`[MISSING FAVICON FILE] ${fav}`);
+    }
+  }
+
   // Sitemap XML validation
   const sitemapXml = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
+  const smImgLocs = [...sitemapXml.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map(m => m[1]);
+  for (const imgLoc of smImgLocs) {
+    const rel = imgLoc.replace(site.domain, '').replace(/^\//, '');
+    if (!fs.existsSync(path.join(ROOT, rel))) {
+      errors.push(`[SITEMAP MISSING IMAGE FILE] ${imgLoc}`);
+    }
+  }
   if (/xml-stylesheet/i.test(sitemapXml)) {
     errors.push('[SITEMAP] Must not contain xml-stylesheet');
   }
