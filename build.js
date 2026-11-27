@@ -19,6 +19,7 @@ const services = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/services.json'
 const areas = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/areas.json'), 'utf8'));
 const posts = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/blog.json'), 'utf8'));
 const projects = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/projects.json'), 'utf8'));
+const guideMeta = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/guide-parquet-tech.json'), 'utf8'));
 
 const claims = site.claims || {};
 const GA4_ID = (site.ga4Id || '').trim();
@@ -40,13 +41,13 @@ function toHref(rawPath) {
   return encodeURI(rawPath);
 }
 
-function writeHtml(relPath, html, indexable = true, asciiKey = null, lastmod = null) {
+function writeHtml(relPath, html, indexable = true, asciiKey = null, lastmod = null, phoneInTitle = false) {
   const urlPath = relPath === 'index.html' ? '/' : '/' + relPath.replace(/index\.html$/, '').replace(/\\/g, '/');
   const diskRelPath = asciiKey ? path.join('_pages', asciiKey, 'index.html') : relPath;
   const fullPath = path.join(ROOT, diskRelPath);
   ensureDir(path.dirname(fullPath));
   fs.writeFileSync(fullPath, html, 'utf8');
-  generatedPages.push({ urlPath, diskRelPath: diskRelPath.replace(/\\/g, '/'), fullPath, html, indexable, lastmod });
+  generatedPages.push({ urlPath, diskRelPath: diskRelPath.replace(/\\/g, '/'), fullPath, html, indexable, lastmod, phoneInTitle });
 }
 
 function esc(str) {
@@ -321,16 +322,18 @@ function renderProjectsSection(filterFn, heading) {
 }
 
 function getServiceTitleAndDesc(s) {
+  let baseTitle = (claims.pvcSkirtingSold && s.titleWhenPvc) ? s.titleWhenPvc : s.title;
+  let baseDesc = (claims.pvcSkirtingSold && s.metaDescriptionWhenPvc) ? s.metaDescriptionWhenPvc : s.metaDescription;
   const designsCount = site.catalogFacts && site.catalogFacts[s.id] ? site.catalogFacts[s.id].designsCount : null;
   if (claims.catalogCount && typeof designsCount === 'number' && designsCount > 0) {
     const countPhrase = `أكثر من ${designsCount} تصميماً ولوناً`;
-    const candidateTitle = s.title.includes('|') ? s.title.replace('|', `(${countPhrase}) |`) : `${s.title} - ${countPhrase}`;
-    const finalTitle = candidateTitle.length <= 60 ? candidateTitle : s.title;
-    const candidateDesc = `${countPhrase} — ${s.metaDescription}`;
-    const finalDesc = candidateDesc.length <= 155 ? candidateDesc : s.metaDescription;
+    const candidateTitle = baseTitle.includes('|') ? baseTitle.replace('|', `(${countPhrase}) |`) : `${baseTitle} - ${countPhrase}`;
+    const finalTitle = candidateTitle.length <= 60 ? candidateTitle : baseTitle;
+    const candidateDesc = `${countPhrase} — ${baseDesc}`;
+    const finalDesc = candidateDesc.length <= 155 ? candidateDesc : baseDesc;
     return { title: finalTitle, description: finalDesc };
   }
-  return { title: s.title, description: s.metaDescription };
+  return { title: baseTitle, description: baseDesc };
 }
 
 // 1. HOME PAGE
@@ -508,7 +511,15 @@ function generateServices() {
         <p>${esc(s.summary)}</p>
         <a href="${toHref('/' + s.slug + '/')}" class="card-link">عرض التفاصيل ←</a>
       </div>
-    </article>`).join('');
+    </article>`).join('') + `
+    <article class="card">
+      <div class="card-body">
+        <span class="card-badge">${esc(guideMeta.badge)}</span>
+        <h3>${esc(guideMeta.shortName)}</h3>
+        <p>${esc(guideMeta.summary)}</p>
+        <a href="${toHref('/' + guideMeta.slug + '/')}" class="card-link">عرض التفاصيل ←</a>
+      </div>
+    </article>`;
 
   const hubHead = buildHead({
     title: 'خدمات الأرضيات والديكور في الكويت | أرضيات أنيقة',
@@ -561,7 +572,7 @@ function generateServices() {
           '@type': 'Service',
           name: s.h1,
           serviceType: s.shortName,
-          description: s.metaDescription,
+          description: svcDesc,
           provider: { '@id': `${site.domain}/#business` },
           areaServed: areas.filter(a => a.indexable !== false).map(a => ({ '@type': 'AdministrativeArea', name: a.governorate })),
           ...(s.image ? { image: site.domain + s.image } : {})
@@ -591,6 +602,8 @@ function generateServices() {
               <div class="prose">
                 <p>${esc(s.intro)}</p>
                 ${s.bodyParagraphs.map(p => `<p>${esc(p)}</p>`).join('')}
+                ${claims.pvcSkirtingSold && s.pvcParagraph ? `<p>${esc(s.pvcParagraph)}</p>` : ''}
+                ${idx === 0 ? `<p>للمزيد من التفاصيل قبل الاتفاق، يمكنك قراءة دليل <a href="${toHref('/' + guideMeta.slug + '/')}">فني باركيه في الكويت: دليل الاختيار</a>.</p>` : ''}
               </div>
               ${kuwaitNoteBoxHtml()}
               <div class="hero-actions" style="margin-top:16px;">
@@ -647,6 +660,147 @@ function generateServices() {
 
     writeHtml(`${s.slug}/index.html`, head + body, true, `service-${idx + 1}`);
   });
+}
+
+// 2B. PARQUET TECHNICIAN GUIDE PAGE (from client-new-page-ar.md)
+function generateGuidePage() {
+  const mdRaw = fs.readFileSync(path.join(ROOT, 'client-new-page-ar.md'), 'utf8').replace(/\r\n/g, '\n');
+  const lines = mdRaw.split('\n');
+  let h1 = '';
+  const introParas = [];
+  const sections = [];
+  const guideFaqs = [];
+  let closingPara = '';
+  let currentSec = null;
+  let inFaq = false;
+  let currentFaq = null;
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    if (!h1 && line.startsWith('# ')) {
+      h1 = line.slice(2).trim();
+      continue;
+    }
+    if (line.startsWith('## ')) {
+      const heading = line.slice(3).trim();
+      if (heading === 'أسئلة شائعة') {
+        inFaq = true;
+        currentSec = null;
+      } else {
+        inFaq = false;
+        currentSec = { heading, items: [] };
+        sections.push(currentSec);
+      }
+      continue;
+    }
+    if (inFaq && line.startsWith('### ')) {
+      currentFaq = { q: line.slice(4).trim(), a: '' };
+      guideFaqs.push(currentFaq);
+      continue;
+    }
+    if (inFaq && currentFaq) {
+      if (line.startsWith('إذا كنت تخطط لتركيب أرضية جديدة')) {
+        closingPara = line;
+        inFaq = false;
+      } else {
+        currentFaq.a = currentFaq.a ? `${currentFaq.a} ${line}` : line;
+      }
+      continue;
+    }
+    if (!currentSec && !inFaq) {
+      introParas.push(line);
+    } else if (currentSec) {
+      if (line.startsWith('- ')) {
+        currentSec.items.push({ type: 'li', text: line.slice(2).trim() });
+      } else {
+        currentSec.items.push({ type: 'p', text: line });
+      }
+    }
+  }
+
+  const linkifyClosing = (txt) => esc(txt)
+    .replace('خدمة تركيب الباركيه في الكويت', `<a href="${toHref('/تركيب-باركيه-الكويت/')}">خدمة تركيب الباركيه في الكويت</a>`)
+    .replace('وزرات الأرضيات', `<a href="${toHref('/تركيب-وزرة-باركيه-الكويت/')}">وزرات الأرضيات</a>`)
+    .replace('أسعار تركيب الباركيه في الكويت', `<a href="${toHref('/أسعار-تركيب-الباركيه-الكويت/')}">أسعار تركيب الباركيه في الكويت</a>`);
+
+  const sectionsHtml = sections.map((sec, i) => {
+    const listItems = sec.items.filter(x => x.type === 'li');
+    const paras = sec.items.filter(x => x.type === 'p');
+    const listHtml = listItems.length ? `<ul class="guide-list" style="padding-right:20px;line-height:1.9;">${listItems.map(li => `<li>${esc(li.text)}</li>`).join('')}</ul>` : '';
+    const parasHtml = paras.map(p => `<p>${esc(p.text)}</p>`).join('');
+    return `
+      <section class="section${i % 2 === 1 ? ' section-alt' : ''}">
+        <div class="container" style="max-width:850px;">
+          <h2>${esc(sec.heading)}</h2>
+          <div class="prose">${parasHtml}${listHtml}</div>
+        </div>
+      </section>`;
+  }).join('');
+
+  const faqsHtml = guideFaqs.map(f => `<div class="faq-item"><div class="faq-q">${esc(f.q)}</div><div class="faq-a">${esc(f.a)}</div></div>`).join('');
+  const authorLine = (site.authorName && site.authorName.trim()) ? ` · الكاتب: ${esc(site.authorName.trim())}` : '';
+
+  const head = buildHead({
+    title: guideMeta.title,
+    description: guideMeta.metaDescription,
+    canonicalPath: `/${guideMeta.slug}/`,
+    schemaGraph: [
+      orgSchema(),
+      breadcrumbSchema([
+        { name: 'الرئيسية', path: '/' },
+        { name: 'خدماتنا', path: '/الخدمات/' },
+        { name: guideMeta.shortName, path: `/${guideMeta.slug}/` }
+      ]),
+      {
+        '@type': 'Service',
+        name: h1,
+        serviceType: guideMeta.shortName,
+        description: guideMeta.metaDescription,
+        provider: { '@id': `${site.domain}/#business` },
+        areaServed: areas.filter(a => a.indexable !== false).map(a => ({ '@type': 'AdministrativeArea', name: a.governorate }))
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: guideFaqs.map(f => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a }
+        }))
+      }
+    ]
+  });
+
+  const body = `<body>
+  ${buildHeader('/الخدمات/')}
+  <main>
+    <div class="page-hero">
+      <div class="container" style="max-width:850px;">
+        <div class="breadcrumbs"><a href="/">الرئيسية</a> / <a href="${toHref('/الخدمات/')}">خدماتنا</a> / <span>${esc(guideMeta.shortName)}</span></div>
+        <span class="card-badge">${esc(guideMeta.badge)}</span>
+        <h1>${esc(h1)}</h1>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:12px;">آخر تحديث: ${esc(guideMeta.lastUpdated)}${authorLine}</p>
+        <div class="prose">${introParas.map(p => `<p>${esc(p)}</p>`).join('')}</div>
+        ${kuwaitNoteBoxHtml()}
+        <div class="hero-actions" style="margin-top:16px;">
+          <a href="tel:+965${site.phone}" class="btn-gold">اتصل الآن</a>
+          <a href="https://wa.me/${site.whatsapp}?text=${encodeURIComponent('السلام عليكم، أود الاستفسار عن فني باركيه في الكويت.')}" target="_blank" rel="noopener" class="btn-primary">تواصل عبر واتساب</a>
+        </div>
+      </div>
+    </div>
+    ${sectionsHtml}
+    <section class="section">
+      <div class="container" style="max-width:850px;">
+        <h2>أسئلة شائعة</h2>
+        <div class="faq-list">${faqsHtml}</div>
+        ${closingPara ? `<div class="prose" style="margin-top:20px;"><p>${linkifyClosing(closingPara)}</p></div>` : ''}
+      </div>
+    </section>
+    ${buildQuoteWidgetsHtml()}
+  </main>
+  ${buildFooter()}`;
+
+  writeHtml(`${guideMeta.slug}/index.html`, head + body, true, guideMeta.asciiKey, guideMeta.lastUpdated, Boolean(guideMeta.phoneInTitle));
 }
 
 // 3. AREAS HUB + GOVERNORATE/AREA PAGES
@@ -1128,7 +1282,9 @@ function validateBuild() {
     'فندقي',
     'شغل نظيف',
     'تخلص غالباً',
-    'ضد الماء بالكامل'
+    'ضد الماء بالكامل',
+    'ملاحظة:',
+    'Act as'
   ];
   if (!claims.europeanOrigin) {
     bannedPhrases.push('الأوروبي', 'أوروبي', 'أوروبية');
@@ -1171,7 +1327,7 @@ function validateBuild() {
       if (seenTitles.has(t)) {
         errors.push(`[DUPLICATE TITLE] "${t}" on ${urlPath} and ${seenTitles.get(t)}`);
       }
-      if (/55983357|\+965/.test(t)) {
+      if (/55983357|\+965/.test(t) && !page.phoneInTitle) {
         errors.push(`[PHONE IN TITLE] Page ${urlPath}: "${t}"`);
       }
       if (!claims.catalogCount && /(?:أكثر من\s+\d+|\d+\+?\s*(?:تصميم|تصميماً|لون|لوناً|موديل))/.test(t)) {
@@ -1353,6 +1509,28 @@ function validateBuild() {
     }
   }
 
+  // Check new guide page vs service-1 sentence similarity (< 35%)
+  const guidePage = generatedPages.find(p => p.urlPath === `/${guideMeta.slug}/`);
+  const svc1Page = generatedPages.find(p => p.urlPath === `/${services[0].slug}/`);
+  if (guidePage && svc1Page) {
+    const extractSents = (htmlStr) => {
+      const mainMatch = htmlStr.match(/<main>([\s\S]*?)<\/main>/i);
+      const text = (mainMatch ? mainMatch[1] : htmlStr).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      return new Set(text.split(/[.!؟؛\n]+/).map(s => s.trim()).filter(s => s.length > 15));
+    };
+    const sGuide = extractSents(guidePage.html);
+    const sSvc1 = extractSents(svc1Page.html);
+    let sharedSents = 0;
+    for (const s of sGuide) {
+      if (sSvc1.has(s)) sharedSents++;
+    }
+    const simRatio = sGuide.size && sSvc1.size ? (sharedSents / Math.min(sGuide.size, sSvc1.size)) : 0;
+    console.log(`Guide vs service-1 sentence similarity: ${(simRatio * 100).toFixed(1)}% (${sharedSents}/${Math.min(sGuide.size, sSvc1.size)})`);
+    if (simRatio >= 0.35) {
+      errors.push(`[GUIDE SIMILARITY ${(simRatio * 100).toFixed(1)}% >= 35%] vs service-1`);
+    }
+  }
+
   if (errors.length > 0) {
     console.error('\n❌ BUILD VALIDATION FAILED:');
     errors.forEach(e => console.error('  -', e));
@@ -1365,6 +1543,7 @@ function validateBuild() {
 // Run build
 generateHome();
 generateServices();
+generateGuidePage();
 generateAreas();
 generateBlog();
 generateSupportingPages();
