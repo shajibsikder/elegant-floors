@@ -998,7 +998,11 @@ function generateBlog() {
           <div class="prose">
             <p><strong>${esc(p.excerpt)}</strong></p>
             ${sectionsHtml}
+            ${Array.isArray(p.relatedLinks) && p.relatedLinks.length ? `<p>روابط ذات صلة: ${p.relatedLinks.map(l => `<a href="${toHref(l.path)}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}
           </div>
+          ${Array.isArray(p.gallery) && p.gallery.length ? `<div class="samples-grid-3" style="margin-top:24px;">
+            ${p.gallery.map(g => `<figure class="card sample-card"><img src="${g.src}" srcset="${g.src800} 800w, ${g.src} 1600w" sizes="(max-width: 768px) 100vw, 280px" alt="${esc(g.alt)}" width="${g.width}" height="${g.height}" loading="lazy" decoding="async"><figcaption>${esc(g.caption || g.alt)}</figcaption></figure>`).join('')}
+          </div>` : ''}
           <div class="widget-box" style="margin-top:32px;background:var(--wood-light);">
             <h3>هل ترغب في استشارة أو طلب معاينة في الكويت؟</h3>
             <p>تواصل معنا مباشرة عبر الهاتف أو واتساب لتنسيق الموعد وطلب عرض سعر.</p>
