@@ -101,7 +101,7 @@ function buildHead({ title, description, canonicalPath, ogImage, schemaGraph, in
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css?v=4.6">${ga4Snippet}
+  <link rel="stylesheet" href="/assets/style.css?v=4.7">${ga4Snippet}
   <script type="application/ld+json">${schemaJson}</script>
 </head>`;
 }
@@ -129,7 +129,7 @@ function buildHeader(activePath) {
   <div class="top-bar">
     <div class="container top-bar-inner">
       <span>${esc(site.kuwaitOnlyNote)}</span>
-      <span>هاتف وواتساب: <a href="tel:+965${site.phone}" dir="ltr">+965 ${site.phone}</a></span>
+      <span>هاتف وواتساب: <a href="tel:+965${site.phone}" dir="ltr">&#x200E;+965 ${site.phone}</a></span>
     </div>
   </div>
   <header class="navbar">
@@ -166,7 +166,7 @@ function buildFooter() {
         <div>
           <h3>${esc(site.brandName)}</h3>
           <p>متخصصون في توريد وتركيب الباركيه، أرضيات SPC، ديكور خلفية التلفزيون، ألواح WPC للجدران، ورق الجدران، ووزرات الأرضيات في الكويت.</p>
-          <p><strong>الهاتف / واتساب:</strong> <a href="tel:+965${site.phone}" dir="ltr">+965 ${site.phone}</a></p>
+          <p><strong>الهاتف / واتساب:</strong> <a href="tel:+965${site.phone}" dir="ltr">&#x200E;+965 ${site.phone}</a></p>
           <p style="color:#fcd34d;font-size:0.88rem;font-weight:700;">${esc(site.kuwaitOnlyNote)}</p>
         </div>
         <div>
@@ -244,6 +244,18 @@ function breadcrumbSchema(items) {
       item: site.domain + toHref(it.path)
     }))
   };
+}
+
+function buildPhoneCalloutHtml() {
+  return `
+  <div class="phone-callout-bar">
+    <div class="container">
+      <div class="phone-callout-box">
+        <span class="phone-callout-label">للتواصل المباشر وطلب المعاينة في الكويت:</span>
+        <a href="tel:+965${site.phone}" class="phone-callout-num" dir="ltr">&#x200E;+965 ${site.phone}</a>
+      </div>
+    </div>
+  </div>`;
 }
 
 function kuwaitNoteBoxHtml() {
@@ -414,6 +426,8 @@ function generateHome() {
       </div>
     </section>
 
+    ${buildPhoneCalloutHtml()}
+
     <section class="section">
       <div class="container">
         <div class="section-header">
@@ -450,7 +464,7 @@ function generateHome() {
       <div class="container">
         <div class="section-header">
           <h2>نماذج من تصاميم الأرضيات والديكورات</h2>
-          <p>صور نماذج تصميمية توضح درجات الألوان والتنفيذ للباركيه وأرضيات SPC وديكور خلفية التلفزيون.</p>
+          <p>صور نماذج تصميمية توضح درجات الألوان وخيارات أرضيات باركيه الكويت وأرضيات SPC وديكور خلفية التلفزيون.</p>
         </div>
         <div class="samples-grid-3">
           <figure class="card sample-card">
@@ -597,6 +611,7 @@ function generateServices() {
     const body = `<body>
     ${buildHeader('/الخدمات/')}
     <main>
+      ${buildPhoneCalloutHtml()}
       <div class="page-hero">
         <div class="container">
           <div class="breadcrumbs"><a href="/">الرئيسية</a> / <a href="${toHref('/الخدمات/')}">خدماتنا</a> / <span>${esc(s.shortName)}</span></div>
@@ -608,7 +623,7 @@ function generateServices() {
               <div class="prose">
                 <p>${esc(s.intro)}</p>
                 ${s.bodyParagraphs.map(p => `<p>${esc(p)}</p>`).join('')}
-                ${idx === 0 ? `<p>للمزيد من التفاصيل قبل الاتفاق، يمكنك قراءة دليل <a href="${toHref('/' + guideMeta.slug + '/')}">فني باركيه في الكويت: دليل الاختيار</a>.</p>` : ''}
+                ${idx === 0 ? `<p>للمزيد من التفاصيل قبل الاتفاق، يمكنك قراءة دليل <a href="${toHref('/' + guideMeta.slug + '/')}">فني تركيب باركيه الكويت: دليل الاختيار</a>.</p>` : ''}
               </div>
               ${kuwaitNoteBoxHtml()}
               <div class="hero-actions" style="margin-top:16px;">
@@ -769,6 +784,7 @@ function generateGuidePage() {
   const body = `<body>
   ${buildHeader('/الخدمات/')}
   <main>
+    ${buildPhoneCalloutHtml()}
     <div class="page-hero">
       <div class="container" style="max-width:850px;">
         <div class="breadcrumbs"><a href="/">الرئيسية</a> / <a href="${toHref('/الخدمات/')}">خدماتنا</a> / <span>${esc(guideMeta.shortName)}</span></div>
@@ -990,6 +1006,7 @@ function generateBlog() {
     writeHtml(`المدونة/${p.slug}/index.html`, head + `<body>
     ${buildHeader('/المدونة/')}
     <main>
+      ${buildPhoneCalloutHtml()}
       <article class="section">
         <div class="container" style="max-width:860px;">
           <div class="breadcrumbs"><a href="/">الرئيسية</a> / <a href="${toHref('/المدونة/')}">المدونة</a> / <span>${esc(p.h1)}</span></div>
@@ -1147,7 +1164,7 @@ function generateSupportingPages() {
       <div class="container">
         <div class="breadcrumbs"><a href="/">الرئيسية</a> / <span>اتصل بنا</span></div>
         <h1>تواصل معنا لطلب معاينة وعرض سعر</h1>
-        <p>الهاتف والواتساب: <strong dir="ltr">+965 ${site.phone}</strong> — ${esc(site.workingHours)}</p>
+        <p>الهاتف والواتساب: <strong dir="ltr">&#x200E;+965 ${site.phone}</strong> — ${esc(site.workingHours)}</p>
         ${kuwaitNoteBoxHtml()}
         <div class="hero-actions" style="margin-top:14px;">
           <a href="tel:+965${site.phone}" class="btn-gold">اتصل الآن</a>
